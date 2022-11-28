@@ -41,6 +41,8 @@
             this.teamTwoScoreTextBox = new System.Windows.Forms.TextBox();
             this.teamTwoScoreLabel = new System.Windows.Forms.Label();
             this.teamTwoName = new System.Windows.Forms.Label();
+            this.versusLabel = new System.Windows.Forms.Label();
+            this.scoreButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -107,7 +109,7 @@
             // 
             this.teamOneName.AutoSize = true;
             this.teamOneName.ForeColor = System.Drawing.Color.Teal;
-            this.teamOneName.Location = new System.Drawing.Point(390, 239);
+            this.teamOneName.Location = new System.Drawing.Point(348, 239);
             this.teamOneName.Name = "teamOneName";
             this.teamOneName.Size = new System.Drawing.Size(141, 30);
             this.teamOneName.TabIndex = 6;
@@ -117,7 +119,7 @@
             // 
             this.teamOneScoreLabel.AutoSize = true;
             this.teamOneScoreLabel.ForeColor = System.Drawing.Color.Teal;
-            this.teamOneScoreLabel.Location = new System.Drawing.Point(390, 284);
+            this.teamOneScoreLabel.Location = new System.Drawing.Point(348, 284);
             this.teamOneScoreLabel.Name = "teamOneScoreLabel";
             this.teamOneScoreLabel.Size = new System.Drawing.Size(64, 30);
             this.teamOneScoreLabel.TabIndex = 7;
@@ -125,44 +127,69 @@
             // 
             // teamOneScoreTextBox
             // 
-            this.teamOneScoreTextBox.Location = new System.Drawing.Point(472, 279);
+            this.teamOneScoreTextBox.Location = new System.Drawing.Point(430, 279);
             this.teamOneScoreTextBox.Name = "teamOneScoreTextBox";
             this.teamOneScoreTextBox.Size = new System.Drawing.Size(100, 35);
             this.teamOneScoreTextBox.TabIndex = 8;
             // 
             // teamTwoScoreTextBox
             // 
-            this.teamTwoScoreTextBox.Location = new System.Drawing.Point(472, 379);
+            this.teamTwoScoreTextBox.Location = new System.Drawing.Point(431, 418);
             this.teamTwoScoreTextBox.Name = "teamTwoScoreTextBox";
             this.teamTwoScoreTextBox.Size = new System.Drawing.Size(100, 35);
             this.teamTwoScoreTextBox.TabIndex = 11;
+            this.teamTwoScoreTextBox.TextChanged += new System.EventHandler(this.teamTwoScoreTextBox_TextChanged);
             // 
             // teamTwoScoreLabel
             // 
             this.teamTwoScoreLabel.AutoSize = true;
             this.teamTwoScoreLabel.ForeColor = System.Drawing.Color.Teal;
-            this.teamTwoScoreLabel.Location = new System.Drawing.Point(390, 384);
+            this.teamTwoScoreLabel.Location = new System.Drawing.Point(349, 423);
             this.teamTwoScoreLabel.Name = "teamTwoScoreLabel";
             this.teamTwoScoreLabel.Size = new System.Drawing.Size(64, 30);
             this.teamTwoScoreLabel.TabIndex = 10;
             this.teamTwoScoreLabel.Text = "Score";
+            this.teamTwoScoreLabel.Click += new System.EventHandler(this.teamTwoScoreLabel_Click);
             // 
             // teamTwoName
             // 
             this.teamTwoName.AutoSize = true;
             this.teamTwoName.ForeColor = System.Drawing.Color.Teal;
-            this.teamTwoName.Location = new System.Drawing.Point(390, 339);
+            this.teamTwoName.Location = new System.Drawing.Point(349, 378);
             this.teamTwoName.Name = "teamTwoName";
             this.teamTwoName.Size = new System.Drawing.Size(140, 30);
             this.teamTwoName.TabIndex = 9;
             this.teamTwoName.Text = "< team two >";
+            this.teamTwoName.Click += new System.EventHandler(this.teamTwoName_Click);
+            // 
+            // versusLabel
+            // 
+            this.versusLabel.AutoSize = true;
+            this.versusLabel.ForeColor = System.Drawing.Color.Teal;
+            this.versusLabel.Location = new System.Drawing.Point(393, 345);
+            this.versusLabel.Name = "versusLabel";
+            this.versusLabel.Size = new System.Drawing.Size(65, 30);
+            this.versusLabel.TabIndex = 12;
+            this.versusLabel.Text = "- VS -";
+            this.versusLabel.Click += new System.EventHandler(this.versusLabel_Click);
+            // 
+            // scoreButton
+            // 
+            this.scoreButton.Location = new System.Drawing.Point(543, 337);
+            this.scoreButton.Name = "scoreButton";
+            this.scoreButton.Size = new System.Drawing.Size(86, 40);
+            this.scoreButton.TabIndex = 13;
+            this.scoreButton.Text = "Score";
+            this.scoreButton.UseVisualStyleBackColor = true;
             // 
             // TournamentViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1600, 1038);
+            this.ClientSize = new System.Drawing.Size(648, 566);
+            this.Controls.Add(this.scoreButton);
+            this.Controls.Add(this.versusLabel);
             this.Controls.Add(this.teamTwoScoreTextBox);
             this.Controls.Add(this.teamTwoScoreLabel);
             this.Controls.Add(this.teamTwoName);
@@ -199,6 +226,8 @@
         private System.Windows.Forms.TextBox teamTwoScoreTextBox;
         private System.Windows.Forms.Label teamTwoScoreLabel;
         private System.Windows.Forms.Label teamTwoName;
+        private System.Windows.Forms.Label versusLabel;
+        private System.Windows.Forms.Button scoreButton;
     }
 }
 

@@ -10,29 +10,29 @@ using System.Windows.Forms;
 
 namespace TrackerUI
 {
-    public partial class TournamentViewerForm : Form
+    public partial class CreateTournamentForm : Form
     {
-        public TournamentViewerForm()
+        public CreateTournamentForm()
         {
             InitializeComponent();
         }
 
-        private void versusLabel_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void teamTwoScoreTextBox_TextChanged(object sender, EventArgs e)
+        private void teamOneScoreTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void teamTwoScoreLabel_Click(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void teamTwoName_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }
