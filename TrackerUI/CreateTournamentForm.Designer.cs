@@ -43,8 +43,9 @@
             this.tournamentPlayersLabel = new System.Windows.Forms.Label();
             this.deleteSelectedPlayerButton = new System.Windows.Forms.Button();
             this.deleteSelectedPrizeButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.teamAndPlayersLabel = new System.Windows.Forms.Label();
             this.prizesListBox = new System.Windows.Forms.ListBox();
+            this.createTournamentButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -120,7 +121,7 @@
             // createNewTeamLabel
             // 
             this.createNewTeamLabel.AutoSize = true;
-            this.createNewTeamLabel.Location = new System.Drawing.Point(31, 298);
+            this.createNewTeamLabel.Location = new System.Drawing.Point(161, 258);
             this.createNewTeamLabel.Name = "createNewTeamLabel";
             this.createNewTeamLabel.Size = new System.Drawing.Size(63, 13);
             this.createNewTeamLabel.TabIndex = 16;
@@ -129,18 +130,18 @@
             // 
             // addTeamButton
             // 
-            this.addTeamButton.Location = new System.Drawing.Point(72, 328);
+            this.addTeamButton.Location = new System.Drawing.Point(12, 328);
             this.addTeamButton.Name = "addTeamButton";
-            this.addTeamButton.Size = new System.Drawing.Size(126, 44);
+            this.addTeamButton.Size = new System.Drawing.Size(108, 44);
             this.addTeamButton.TabIndex = 17;
             this.addTeamButton.Text = "Add Team";
             this.addTeamButton.UseVisualStyleBackColor = true;
             // 
             // createPrizeButton
             // 
-            this.createPrizeButton.Location = new System.Drawing.Point(72, 394);
+            this.createPrizeButton.Location = new System.Drawing.Point(130, 328);
             this.createPrizeButton.Name = "createPrizeButton";
-            this.createPrizeButton.Size = new System.Drawing.Size(126, 44);
+            this.createPrizeButton.Size = new System.Drawing.Size(107, 44);
             this.createPrizeButton.TabIndex = 18;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
@@ -184,17 +185,17 @@
             this.deleteSelectedPrizeButton.Text = "Delete Selected";
             this.deleteSelectedPrizeButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // teamAndPlayersLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label1.Location = new System.Drawing.Point(275, 238);
-            this.label1.Name = "label1";
-            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label1.Size = new System.Drawing.Size(121, 21);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Team / Players";
+            this.teamAndPlayersLabel.AutoSize = true;
+            this.teamAndPlayersLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.teamAndPlayersLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.teamAndPlayersLabel.Location = new System.Drawing.Point(275, 238);
+            this.teamAndPlayersLabel.Name = "teamAndPlayersLabel";
+            this.teamAndPlayersLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.teamAndPlayersLabel.Size = new System.Drawing.Size(121, 21);
+            this.teamAndPlayersLabel.TabIndex = 23;
+            this.teamAndPlayersLabel.Text = "Team / Players";
             // 
             // prizesListBox
             // 
@@ -204,13 +205,23 @@
             this.prizesListBox.Size = new System.Drawing.Size(228, 56);
             this.prizesListBox.TabIndex = 22;
             // 
+            // createTournamentButton
+            // 
+            this.createTournamentButton.Location = new System.Drawing.Point(199, 409);
+            this.createTournamentButton.Name = "createTournamentButton";
+            this.createTournamentButton.Size = new System.Drawing.Size(126, 44);
+            this.createTournamentButton.TabIndex = 25;
+            this.createTournamentButton.Text = "Create Tournament";
+            this.createTournamentButton.UseVisualStyleBackColor = true;
+            // 
             // CreateTournamentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 450);
+            this.ClientSize = new System.Drawing.Size(533, 465);
+            this.Controls.Add(this.createTournamentButton);
             this.Controls.Add(this.deleteSelectedPrizeButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.teamAndPlayersLabel);
             this.Controls.Add(this.prizesListBox);
             this.Controls.Add(this.deleteSelectedPlayerButton);
             this.Controls.Add(this.tournamentPlayersLabel);
@@ -251,7 +262,8 @@
         private System.Windows.Forms.Label tournamentPlayersLabel;
         private System.Windows.Forms.Button deleteSelectedPlayerButton;
         private System.Windows.Forms.Button deleteSelectedPrizeButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label teamAndPlayersLabel;
         private System.Windows.Forms.ListBox prizesListBox;
+        private System.Windows.Forms.Button createTournamentButton;
     }
 }
