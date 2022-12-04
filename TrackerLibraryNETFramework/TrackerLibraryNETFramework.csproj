@@ -31,7 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,7 +47,7 @@
   <ItemGroup>
     <Compile Include="Data\IDataConnection.cs" />
     <Compile Include="Data\SqlConnector.cs" />
-    <Compile Include="Data\TextConnection.cs" />
+    <Compile Include="Data\TextConnector.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="Models\MatchupEntryModel.cs" />
     <Compile Include="Models\MatchupModel.cs" />
@@ -53,6 +57,8 @@
     <Compile Include="Models\TournamentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

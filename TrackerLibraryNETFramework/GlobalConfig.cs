@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,14 @@ namespace TrackerLibraryNETFramework
             if (textFiles)
             {
                 // TODO - create the test connection
-                TextConnecion text = new TextConnecion();
+                TextConnector text = new TextConnector();
                 Connections.Add(text);
             }
+        }
+
+        public static string ConnectionString(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
     }
 }

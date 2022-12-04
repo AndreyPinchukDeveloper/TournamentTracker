@@ -7,7 +7,7 @@ using TrackerLibraryNETFramework.Models;
 
 namespace TrackerLibraryNETFramework.Data
 {
-    public class TextConnecion : IDataConnection
+    public class TextConnector : IDataConnection
     {
         // TODO - wire up the createPrize for text files
         public PrizeModel CreatePrize(PrizeModel model)
