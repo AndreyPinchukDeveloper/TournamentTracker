@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +22,10 @@ namespace TrackerLibraryNETFramework.Data
         /// <returns>The prize information incliding the unique identifier</returns>
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            model.Id = 1;
-            return model;
+            using(IDbConnection  connection = new SqlConnection(GlobalConfig.ConnectionString("Tournaments")))
+            {
+
+            }
         }
     }
 }
