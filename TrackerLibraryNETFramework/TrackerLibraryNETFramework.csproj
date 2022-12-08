@@ -48,6 +48,7 @@
     <Compile Include="Data\IDataConnection.cs" />
     <Compile Include="Data\SqlConnector.cs" />
     <Compile Include="Data\TextConnector.cs" />
+    <Compile Include="Data\TextConnectorProcessor.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="Models\MatchupEntryModel.cs" />
