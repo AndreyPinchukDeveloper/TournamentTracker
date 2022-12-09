@@ -9,13 +9,25 @@ namespace TrackerLibraryNETFramework.Data
 {
     public class TextConnector : IDataConnection
     {
+        private const string PrizesFile = "PrizeModels.csv";
+
         // TODO - wire up the createPrize for text files
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            // load the text file
-            // convert the text to List<PrizeModel>
-            //find the ID
+            // load the text file convert the text to List<PrizeModel>
+            List<PrizeModel> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModel();
+
+            //find the max ID
+            int currentId = prizes.OrderByDescending(x => x.Id).First().Id + 1;
+            model.Id = currentId;
+
             // new record ID
+            prizes.Add(model);
+
+
+
+            
+            
             // convert the prizes to List<strings>
             // save it to the text file
 
