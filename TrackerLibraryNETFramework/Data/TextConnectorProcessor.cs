@@ -55,6 +55,8 @@ namespace TrackerLibraryNETFramework.Data
             {
                 lines.Add($"{p.Id},{p.PlaceNumber},{ p.PlaceName},{p.PrizeAmount},{p.PrizePercentage}");
             }
+
+            File.WriteAllLines(fileName.FullFilePath(), lines);
         }
     }
 }
