@@ -10,6 +10,7 @@ namespace TrackerLibraryNETFramework.Data
     public class TextConnector : IDataConnection
     {
         private const string PrizesFile = "PrizeModels.csv";
+        private const string TeamMembersFile = "TeamMemberModels.csv";
 
         // TODO - wire up the createPrize for text files
         public PrizeModel CreatePrize(PrizeModel model)
@@ -33,6 +34,24 @@ namespace TrackerLibraryNETFramework.Data
             // save it to the text file
 
             prizes.SaveToPrizeFile(PrizesFile);
+
+            return model;
+        }
+
+        public PersonModel CreateTeamMember(PersonModel model)
+        {
+            List<PersonModel> members = TeamMembersFile.FullFilePath().LoadFile().ConvertToPersonModel();
+            
+            int currentId = 1;
+
+            if (members.Count > 0)
+            {
+                currentId = members.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            model.Id = currentId;
+            members.Add(model);
+            members.SaveToPersonFile(TeamMembersFile);
 
             return model;
         }

@@ -12,9 +12,24 @@ namespace TrackerLibraryNETFramework.Data
 {
     public class SqlConnector : IDataConnection
     {
-        // TODO - Male the createPrize method actually save to the database
+        public PersonModel CreateTeamMember(PersonModel model)
+        {
+            using(IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString("Tournaments")))
+            {
+                var member = new DynamicParameters();
 
-        
+                member.Add("@FirstName", model.FirstName);
+                member.Add("@LastName", model.LastName);
+                member.Add("@Email", model.EmailAddress);
+                member.Add("@PhoneNumber", model.CellphoneNumber);
+                member.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spTeamMember_Insert", member, commandType: CommandType.StoredProcedure);
+                //"test".FullFilePath();
+                model.Id = member.Get<int>("@id");
+                return model;
+            }
+        }
 
         /// <summary>
         /// Save a new prize to the database
@@ -34,10 +49,11 @@ namespace TrackerLibraryNETFramework.Data
                 p.Add("@id", 0, dbType: DbType.Int32, direction:ParameterDirection.Output);
 
                 connection.Execute("dbo.spPrizes", p, commandType: CommandType.StoredProcedure);
-
+                //"test".FullFilePath();
                 model.Id = p.Get<int>("@id");
                 return model;
             }
         }
+
     }
 }

@@ -10,6 +10,7 @@ namespace TrackerLibraryNETFramework.Data
     public interface IDataConnection
     {
         PrizeModel CreatePrize(PrizeModel model);
+        PersonModel CreateTeamMember(PersonModel model);
 
     }
 }

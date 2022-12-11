@@ -11,6 +11,7 @@ namespace TrackerLibrary
     /// </summary>
     public class PersonModel
     {
+        public int Id { get; set; }
         /// <summary>
         /// The first name of the person
         /// </summary>
