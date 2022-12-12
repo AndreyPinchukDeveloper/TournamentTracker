@@ -55,5 +55,10 @@ namespace TrackerLibraryNETFramework.Data
 
             return model;
         }
+
+        public List<PersonModel> GetPerson_All()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

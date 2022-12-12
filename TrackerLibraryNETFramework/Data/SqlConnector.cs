@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TrackerLibraryNETFramework.Models;
@@ -12,9 +13,11 @@ namespace TrackerLibraryNETFramework.Data
 {
     public class SqlConnector : IDataConnection
     {
+        private const string db = "Tournaments";
+
         public PersonModel CreateTeamMember(PersonModel model)
         {
-            using(IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString("Tournaments")))
+            using(IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
                 var member = new DynamicParameters();
 
@@ -38,7 +41,7 @@ namespace TrackerLibraryNETFramework.Data
         /// <returns>The prize information incliding the unique identifier</returns>
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            using(IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString("Tournaments")))
+            using(IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
                 var p = new DynamicParameters();
 
@@ -55,5 +58,20 @@ namespace TrackerLibraryNETFramework.Data
             }
         }
 
+        /// <summary>
+        /// This method shows all members into listBox from db
+        /// </summary>
+        /// <returns></returns>
+        public List<PersonModel> GetPerson_All()
+        {
+            List<PersonModel> output;
+
+            using(IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
+            {
+                output = connection.Query<PersonModel>("dbo.spTeamMember_GetAll").ToList();
+            }
+
+            return output;
+        }
     }
 }

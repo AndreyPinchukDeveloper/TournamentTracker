@@ -17,9 +17,32 @@ namespace TrackerUI
         // TODO - use dictionary instead of infinity if/else
         // TODO - don't use code behind add commands
         // TODO - remove all duplicate code
+
+        private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();//get information from db
+        private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
+
         public CreateTeamForm()
         {
             InitializeComponent();
+            CreateSampleData();
+            WireUpLists();
+        }
+
+        private void CreateSampleData()
+        {
+            availableTeamMembers.Add(new PersonModel { FirstName = "Andre", LastName = "Great"});
+            availableTeamMembers.Add(new PersonModel { FirstName = "Bro", LastName = "Nobro" });
+
+            selectedTeamMembers.Add(new PersonModel { FirstName = "NoAndre", LastName = "NoGreat" });
+        }
+
+        private void WireUpLists()
+        {
+            selectTeamMemberDropDown.DataSource = availableTeamMembers;
+            selectTeamMemberDropDown.DisplayMember = "FullName";
+
+            teamMembersListBox.DataSource = selectedTeamMembers;
+            teamMembersListBox.DisplayMember = "FullName";
         }
 
         private void createMemberButton_Click(object sender, EventArgs e)
@@ -73,6 +96,14 @@ namespace TrackerUI
             }
 
             return true;
+        }
+
+        private void addMemberButton_Click(object sender, EventArgs e)
+        {
+            PersonModel member = (PersonModel)selectTeamMemberDropDown.SelectedItem;
+
+            availableTeamMembers.Remove(member);
+            selectedTeamMembers.Add(member);
         }
     }
 }
