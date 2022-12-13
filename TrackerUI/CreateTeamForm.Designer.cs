@@ -221,6 +221,7 @@
             this.deleteSelectedMember.TabIndex = 22;
             this.deleteSelectedMember.Text = "Delete Selected";
             this.deleteSelectedMember.UseVisualStyleBackColor = true;
+            this.deleteSelectedMember.Click += new System.EventHandler(this.deleteSelectedMember_Click);
             // 
             // createTeamButton
             // 
