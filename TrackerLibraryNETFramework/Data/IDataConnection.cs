@@ -11,7 +11,7 @@ namespace TrackerLibraryNETFramework.Data
     {
         PrizeModel CreatePrize(PrizeModel model);
         PersonModel CreateTeamMember(PersonModel model);
-
         List<PersonModel> GetPerson_All();
+        TeamModel CreateTeam(TeamModel model);
     }
 }

@@ -38,6 +38,11 @@ namespace TrackerLibraryNETFramework.Data
             return model;
         }
 
+        public TeamModel CreateTeam(TeamModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public PersonModel CreateTeamMember(PersonModel model)
         {
             List<PersonModel> members = TeamMembersFile.FullFilePath().LoadFile().ConvertToPersonModel();
@@ -58,7 +63,7 @@ namespace TrackerLibraryNETFramework.Data
 
         public List<PersonModel> GetPerson_All()
         {
-            throw new NotImplementedException();
+            return TeamMembersFile.FullFilePath().LoadFile().ConvertToPersonModel();   
         }
     }
 }

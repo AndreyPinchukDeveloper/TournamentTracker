@@ -52,7 +52,7 @@ namespace TrackerLibraryNETFramework.Data
                 p.Add("@id", 0, dbType: DbType.Int32, direction:ParameterDirection.Output);
 
                 connection.Execute("dbo.spPrizes", p, commandType: CommandType.StoredProcedure);
-                //"test".FullFilePath();
+
                 model.Id = p.Get<int>("@id");
                 return model;
             }
@@ -72,6 +72,23 @@ namespace TrackerLibraryNETFramework.Data
             }
 
             return output;
+        }
+
+        public TeamModel CreateTeam(TeamModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@TeamName", model.TeamName);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spTeam_Insert", p, commandType: CommandType.StoredProcedure);
+                model.Id = p.Get<int>("@id");
+
+
+                return model;
+            }
         }
     }
 }

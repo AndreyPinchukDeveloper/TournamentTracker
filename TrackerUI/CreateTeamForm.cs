@@ -61,7 +61,9 @@ namespace TrackerUI
                     CellphoneNumber = cellphoneValueTextBox.Text
                 };
 
-                GlobalConfig.Connection.CreateTeamMember(teamMember);
+                teamMember = GlobalConfig.Connection.CreateTeamMember(teamMember);
+                selectedTeamMembers.Add(teamMember);
+                WireUpLists();
 
                 firstNameValueTextBox.Text = "";
                 lastNameValueTextBox.Text = "";
@@ -107,20 +109,34 @@ namespace TrackerUI
         {
             PersonModel member = (PersonModel)selectTeamMemberDropDown.SelectedItem;
 
-            availableTeamMembers.Remove(member);
-            selectedTeamMembers.Add(member);
+            if (member != null)
+            {
+                availableTeamMembers.Remove(member);
+                selectedTeamMembers.Add(member);
 
-            WireUpLists();
+                WireUpLists();
+            }
+
+            
         }
 
         private void deleteSelectedMember_Click(object sender, EventArgs e)
         {
             PersonModel member = (PersonModel)teamMembersListBox.SelectedItem;
 
-            selectedTeamMembers.Remove(member);
-            availableTeamMembers.Add(member);
+            if (member != null)
+            {
+                selectedTeamMembers.Remove(member);
+                availableTeamMembers.Add(member);
 
-            WireUpLists();
+                WireUpLists();
+            }
+            
+        }
+
+        private void createTeamButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
