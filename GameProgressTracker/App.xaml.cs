@@ -24,8 +24,8 @@ namespace GameProgressTracker
                 platform.MakeRegistration(new Registration(
                                 new GameID("PhantasyStar"),
                                 "Phantasy Star",
-                                new DateTime(15, 12, 2022),
-                                new DateTime(16, 12, 2022)));
+                                new DateTime(2022, 12, 12),
+                                new DateTime(2022, 12, 13)));
             }
             catch (RegistrationConflictException exception)
             {

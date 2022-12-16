@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:GameProgressTracker"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
     </Application.Resources>
 </Application>
