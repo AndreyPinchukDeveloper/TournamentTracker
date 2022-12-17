@@ -21,9 +21,9 @@ namespace GameProgressTracker.Models
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public IEnumerable<Registration> GetRegistrationForUser(string name) 
+        public IEnumerable<Registration> GetAllRegistrations() 
         {
-            return _progress.GetRegistrationsForUser(name);
+            return _progress.GetAllRegistrations();
         }
 
         /// <summary>

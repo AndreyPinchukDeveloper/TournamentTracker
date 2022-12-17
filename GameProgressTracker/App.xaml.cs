@@ -34,7 +34,7 @@ namespace GameProgressTracker
 
             
 
-            IEnumerable<Registration> registrations = platform.GetRegistrationForUser("Andre");
+            IEnumerable<Registration> registrations = platform.GetAllRegistrations();
 
             base.OnStartup(e);
         }

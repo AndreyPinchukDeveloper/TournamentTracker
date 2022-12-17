@@ -16,9 +16,9 @@ namespace GameProgressTracker.Models
             _gameToRegistration = new List<Registration>();
         }
 
-        public IEnumerable<Registration> GetRegistrationsForUser(string games)
+        public IEnumerable<Registration> GetAllRegistrations()
         {
-            return _gameToRegistration.Where(g => g.NameOfGame == games);
+            return _gameToRegistration;
         }
 
         public void AddRegistration(Registration registration) 
