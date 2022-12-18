@@ -27,7 +27,8 @@
                 Grid.Column="1"
                 Margin="10 0 0 0"
                 Width="100"
-                Content="Add"/>
+                Content="Add"
+                Command="{Binding AddButtonCommand}"/>
         </Grid>
 
         <ListView Grid.Row="1" Margin="0 25 0 0">

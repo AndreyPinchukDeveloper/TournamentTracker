@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Models
 {
-    class GameID
+    public class GameID
     {
         public string NameOfGame { get;}
 

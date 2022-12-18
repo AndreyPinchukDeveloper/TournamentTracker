@@ -30,13 +30,12 @@ namespace GameProgressTracker
             catch (RegistrationConflictException exception)
             {
 
-            }
-
-            
+            }           
 
             IEnumerable<Registration> registrations = platform.GetAllRegistrations();
 
             base.OnStartup(e);
+
         }
     }
 }
