@@ -7,9 +7,9 @@
         xmlns:views="clr-namespace:GameProgressTracker.Views"
         mc:Ignorable="d"
         FontSize="14"
-        Title="My Progress" Height="350" Width="300">
+        Title="My Progress" Height="550" Width="600">
     
-    <Grid Margin="20" MaxHeight="350" MaxWidth="300">
-        <views:ProgressListingView/>
+    <Grid Margin="20" MaxHeight="550" MaxWidth="600">
+        <views:ProgressListingView DataContext="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

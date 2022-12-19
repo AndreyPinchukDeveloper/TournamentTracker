@@ -31,7 +31,7 @@
                 Command="{Binding AddButtonCommand}"/>
         </Grid>
 
-        <ListView Grid.Row="1" Margin="0 25 0 0">
+        <ListView Grid.Row="1" Margin="0 25 0 0" ItemsSource="{Binding Registration}">
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -44,7 +44,7 @@
                     <GridViewColumn Header="#">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="1" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding NumberInColumn}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -52,7 +52,7 @@
                     <GridViewColumn Header="Name of game">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="Phantasy Star" Padding="0 0 20 0"/>
+                                <TextBlock Text="{Binding NameOfGame}" Padding="0 0 20 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -60,7 +60,7 @@
                     <GridViewColumn Header="Start Date">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="8/20/2022" Padding="0 0 20 0"/>
+                                <TextBlock Text="{Binding StartTime}" Padding="0 0 20 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -68,7 +68,7 @@
                     <GridViewColumn Header="End Date">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="9/12/2022" Padding="0 0 20 0"/>
+                                <TextBlock Text="{Binding EndTime}" Padding="0 0 20 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

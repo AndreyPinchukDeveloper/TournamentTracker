@@ -1,5 +1,6 @@
 ﻿using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
+using GameProgressTracker.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,22 +18,11 @@ namespace GameProgressTracker
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            GamePlatform platform = new GamePlatform("SEGA");
-
-            try
+            MainWindow = new MainWindow()
             {
-                platform.MakeRegistration(new Registration(
-                                new GameID("PhantasyStar"),
-                                "Phantasy Star",
-                                new DateTime(2022, 12, 12),
-                                new DateTime(2022, 12, 13)));
-            }
-            catch (RegistrationConflictException exception)
-            {
-
-            }           
-
-            IEnumerable<Registration> registrations = platform.GetAllRegistrations();
+                DataContext = new MainViewModel()
+            };
+            MainWindow.Show();
 
             base.OnStartup(e);
 

@@ -12,10 +12,10 @@ namespace GameProgressTracker.ViewModels
     {
         private readonly Registration _registration;
 
-        public string NumberInColumn { get; }
-        public string NameOfGame { get; }
-        public DateTime StartTime { get; }
-        public DateTime EndTime { get; }
+        public string NumberInColumn => _registration.GameId?.ToString();
+        public string NameOfGame => _registration.NameOfGame;
+        public string StartTime => _registration.StartTime.ToString("d");
+        public string EndTime => _registration.EndTime.ToString("d");
 
         public RegistrationViewModel(Registration registration)
         {

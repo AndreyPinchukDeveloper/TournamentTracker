@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameProgressTracker.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,7 +61,8 @@ namespace GameProgressTracker.ViewModels
 
         public AddRegistrationViewModel()
         {
-
+            SubmitButtonCommand = new AddRegistrationCommand();
+            CancelButtonCommand = new AddRegistrationCommand();
         }
     }
 }
