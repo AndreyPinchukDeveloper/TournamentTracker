@@ -16,11 +16,17 @@ namespace GameProgressTracker
     /// </summary>
     public partial class App : Application
     {
+        private readonly GamePlatform _platform;
+        public App()
+        {
+            _platform = new GamePlatform("PC");
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(_platform)
             };
             MainWindow.Show();
 

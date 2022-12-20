@@ -1,4 +1,5 @@
 ﻿using GameProgressTracker.Commands;
+using GameProgressTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,10 +60,10 @@ namespace GameProgressTracker.ViewModels
         public ICommand CancelButtonCommand { get; }
         #endregion
 
-        public AddRegistrationViewModel()
+        public AddRegistrationViewModel(GamePlatform platform)
         {
-            SubmitButtonCommand = new AddRegistrationCommand();
-            CancelButtonCommand = new AddRegistrationCommand();
+            SubmitButtonCommand = new AddRegistrationCommand(this, platform);
+            CancelButtonCommand = new CancelAddRegistrationCommand();
         }
     }
 }

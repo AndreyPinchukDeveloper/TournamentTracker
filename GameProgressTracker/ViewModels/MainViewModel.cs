@@ -1,4 +1,5 @@
-﻿using GameProgressTracker.Views;
+﻿using GameProgressTracker.Models;
+using GameProgressTracker.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace GameProgressTracker.ViewModels
     {
         public ViewModelBase CurrentViewModel { get; }
 
-        public MainViewModel()
+        public MainViewModel(GamePlatform platform)
         {
+            //CurrentViewModel = new RegistrationListingViewModel(platform);
             CurrentViewModel = new RegistrationListingViewModel();
         }
     }
