@@ -1,4 +1,5 @@
 ﻿using GameProgressTracker.Models;
+using GameProgressTracker.Stores;
 using GameProgressTracker.Views;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,18 @@ namespace GameProgressTracker.ViewModels
 {
     public class MainViewModel:ViewModelBase
     {
-        public ViewModelBase CurrentViewModel { get; }
-
-        public MainViewModel(GamePlatform platform)
+        private readonly NavigationStore _navigationStore;
+        public MainViewModel(NavigationStore navigationStore)
         {
-            //CurrentViewModel = new RegistrationListingViewModel(platform);
-            CurrentViewModel = new RegistrationListingViewModel();
+            _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
+
+        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GameProgressTracker.Commands;
 using GameProgressTracker.Models;
+using GameProgressTracker.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,11 +22,11 @@ namespace GameProgressTracker.ViewModels
         public ICommand AddNewGameButtonCommand { get;}
         #endregion
 
-        public RegistrationListingViewModel()
+        public RegistrationListingViewModel(NavigationStore navigationStore)
         {
             _registration = new ObservableCollection<RegistrationViewModel>();
 
-            AddNewGameButtonCommand = new NavigateCommand();
+            AddNewGameButtonCommand = new NavigateCommand(navigationStore);
 
             _registration.Add(new RegistrationViewModel(new Registration(new GameID("SEGA"), "Phantasy Star", DateTime.Now, DateTime.Now)));
             _registration.Add(new RegistrationViewModel(new Registration(new GameID("SEGA"), "Phantasy Star", DateTime.Now, DateTime.Now)));

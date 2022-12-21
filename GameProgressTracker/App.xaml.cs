@@ -1,5 +1,6 @@
 ﻿using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
+using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,21 +18,24 @@ namespace GameProgressTracker
     public partial class App : Application
     {
         private readonly GamePlatform _platform;
+        private readonly NavigationStore _navigationStore;
         public App()
         {
-            _platform = new GamePlatform("PC");
+            _platform = new GamePlatform("PC");//emit the memory for this object(always when we create new object)
+            _navigationStore = new NavigationStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore);
+
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_platform)
+                DataContext = new MainViewModel(_navigationStore)
             };
             MainWindow.Show();
 
             base.OnStartup(e);
-
         }
     }
 }
