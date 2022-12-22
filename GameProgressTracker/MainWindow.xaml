@@ -11,6 +11,7 @@
         Title="My Progress" Height="550" Width="600">
     
     <Grid Margin="20" MaxHeight="550" MaxWidth="600">
+        
         <Grid.Resources>
             <DataTemplate DataType="{x:Type vms:AddRegistrationViewModel}">
                 <views:AddNewProgressView/>

@@ -1,5 +1,4 @@
 ﻿using GameProgressTracker.Commands.Base;
-using GameProgressTracker.Models;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
@@ -10,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Commands
 {
-    public class CancelAddRegistrationCommand : CommandBase
+    internal class CreateNewRegistrationCommand : CommandBase
     {
         private readonly NavigationStore _navigationStore;
-        private readonly GamePlatform _gamePlatform;
 
-        public CancelAddRegistrationCommand(NavigationStore navigationStore)
+        public CreateNewRegistrationCommand(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
         }
 
-
-
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = new AddRegistrationViewModel(_gamePlatform);
+            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore);
         }
     }
 }

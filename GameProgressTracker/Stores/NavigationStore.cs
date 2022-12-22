@@ -23,6 +23,9 @@ namespace GameProgressTracker.Stores
             } 
         }
 
+        /// <summary>
+        /// This method invoke method given from another class by using delegate 
+        /// </summary>
         private void OnCurrentViewModelChanged() 
         {
             CurrentViewModelChanged?.Invoke();

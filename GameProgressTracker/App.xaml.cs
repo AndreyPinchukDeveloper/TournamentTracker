@@ -19,6 +19,7 @@ namespace GameProgressTracker
     {
         private readonly GamePlatform _platform;
         private readonly NavigationStore _navigationStore;
+
         public App()
         {
             _platform = new GamePlatform("PC");//emit the memory for this object(always when we create new object)
