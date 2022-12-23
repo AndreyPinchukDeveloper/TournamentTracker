@@ -10,18 +10,22 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Commands
 {
-    public class NavigateCommand : CommandBase
+    public class NavigateCommand<TViewModel> : CommandBase 
+        where TViewModel : ViewModelBase
+
     {
         private readonly NavigationStore _navigationStore;
+        private readonly Func<TViewModel> _createViewModel;
 
-        public NavigateCommand(NavigationStore navigationStore)
+        public NavigateCommand(NavigationStore navigationStore, Func<TViewModel> createViewModel)
         {
             _navigationStore = navigationStore;
+            _createViewModel = createViewModel;
         }
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = new AddRegistrationViewModel(new GamePlatform(""));
+            _navigationStore.CurrentViewModel = _createViewModel();
         }
     }
 }

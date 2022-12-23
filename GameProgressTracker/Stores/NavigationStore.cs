@@ -19,7 +19,7 @@ namespace GameProgressTracker.Stores
             set 
             {
                 _currentViewModel = value;
-                OnCurrentViewModelChanged();
+                OnCurrentViewModelChanged(); 
             } 
         }
 
