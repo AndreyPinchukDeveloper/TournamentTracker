@@ -37,5 +37,6 @@ namespace GameProgressTracker
 
             base.OnStartup(e);
         }
+        ////
     }
 }
