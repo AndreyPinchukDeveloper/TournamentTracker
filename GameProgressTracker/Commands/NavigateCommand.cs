@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Commands
 {
+    /// <summary>
+    /// The main class for navigate(switch) between windows
+    /// </summary>
+    /// <typeparam name="TViewModel"></typeparam>
     public class NavigateCommand<TViewModel> : CommandBase 
         where TViewModel : ViewModelBase
 

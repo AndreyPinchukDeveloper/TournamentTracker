@@ -13,6 +13,7 @@ namespace GameProgressTracker.Commands
     public class CancelAddRegistrationCommand : CommandBase
     {
         private readonly NavigationStore _navigationStore;
+        private readonly GamePlatform _platform;
 
         public CancelAddRegistrationCommand(NavigationStore navigationStore)
         {
@@ -21,7 +22,7 @@ namespace GameProgressTracker.Commands
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore);
+            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore, _platform);
         }
     }
 }

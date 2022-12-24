@@ -1,4 +1,5 @@
 ﻿using GameProgressTracker.Commands.Base;
+using GameProgressTracker.Models;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
@@ -12,6 +13,7 @@ namespace GameProgressTracker.Commands
     internal class CreateNewRegistrationCommand : CommandBase
     {
         private readonly NavigationStore _navigationStore;
+        private readonly GamePlatform _gamePlatform;
 
         public CreateNewRegistrationCommand(NavigationStore navigationStore)
         {
@@ -20,7 +22,7 @@ namespace GameProgressTracker.Commands
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore);
+            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore, _gamePlatform);
         }
     }
 }

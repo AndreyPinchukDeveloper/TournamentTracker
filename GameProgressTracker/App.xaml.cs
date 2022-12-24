@@ -28,8 +28,7 @@ namespace GameProgressTracker
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore);
-
+            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore, _platform);
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(_navigationStore)

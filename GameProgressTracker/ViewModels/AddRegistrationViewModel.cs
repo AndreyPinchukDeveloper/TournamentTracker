@@ -61,14 +61,10 @@ namespace GameProgressTracker.ViewModels
         public ICommand CancelButtonCommand { get; }
         #endregion
 
-        public AddRegistrationViewModel(GamePlatform platform)
+        public AddRegistrationViewModel(NavigationStore navigationStore, GamePlatform platform)
         {
             SubmitButtonCommand = new AddRegistrationCommand(this, platform);
-        }
-
-        public AddRegistrationViewModel(NavigationStore navigationStore)
-        {
-            CancelButtonCommand = new NavigateCommand<RegistrationListingViewModel>(navigationStore, () => new RegistrationListingViewModel(navigationStore));
+            CancelButtonCommand = new NavigateCommand<RegistrationListingViewModel>(navigationStore, () => new RegistrationListingViewModel(navigationStore, platform));
         }
     }
 }
