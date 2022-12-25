@@ -22,7 +22,7 @@ namespace GameProgressTracker.Commands
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore, _gamePlatform);
+            //_navigationStore.CurrentViewModel = new RegistrationListingViewModel(_navigationStore, _gamePlatform);
         }
     }
 }
