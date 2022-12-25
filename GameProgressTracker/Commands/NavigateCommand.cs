@@ -1,12 +1,5 @@
 ﻿using GameProgressTracker.Commands.Base;
-using GameProgressTracker.Models;
-using GameProgressTracker.Stores;
-using GameProgressTracker.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GameProgressTracker.Services;
 
 namespace GameProgressTracker.Commands
 {
@@ -14,22 +7,18 @@ namespace GameProgressTracker.Commands
     /// The main class for navigate(switch) between windows
     /// </summary>
     /// <typeparam name="TViewModel"></typeparam>
-    public class NavigateCommand<TViewModel> : CommandBase 
-        where TViewModel : ViewModelBase
-
+    /*public class NavigateCommand : CommandBase
     {
-        private readonly NavigationStore _navigationStore;
-        private readonly Func<TViewModel> _createViewModel;
+        private readonly NavigationService _navigationServices;
 
-        public NavigateCommand(NavigationStore navigationStore, Func<TViewModel> createViewModel)
+        public NavigateCommand(NavigationService navigationService)
         {
-            _navigationStore = navigationStore;
-            _createViewModel = createViewModel;
+            _navigationServices = navigationService;   
         }
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = _createViewModel();
+            _navigationServices.Navigate();
         }
-    }
+    }*/
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Commands
 {
-    internal class CreateNewRegistrationCommand : CommandBase
+    public class CreateNewRegistrationCommand : CommandBase
     {
         private readonly NavigationStore _navigationStore;
         private readonly GamePlatform _gamePlatform;
