@@ -1,13 +1,9 @@
 ﻿using GameProgressTracker.Commands.Base;
 using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
+using GameProgressTracker.Services;
 using GameProgressTracker.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GameProgressTracker.Commands
@@ -15,11 +11,13 @@ namespace GameProgressTracker.Commands
     public class AddRegistrationCommand : CommandBase
     {
         private readonly GamePlatform _platform;
+        private readonly NavigationService _navigationService;
         private readonly AddRegistrationViewModel _addRegistrationViewModel;
 
-        public AddRegistrationCommand(AddRegistrationViewModel addRegistrationViewModel, GamePlatform platform)
+        public AddRegistrationCommand(AddRegistrationViewModel addRegistrationViewModel, GamePlatform platform, NavigationService navigationService)
         {
             _platform = platform;
+            _navigationService = navigationService;
             _addRegistrationViewModel = addRegistrationViewModel;
 
             _addRegistrationViewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -45,6 +43,8 @@ namespace GameProgressTracker.Commands
 
                 MessageBox.Show("The job has done, my lord.", "Succes",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+
+                _navigationService.Navigate();
             }
             catch (RegistrationConflictException)
             {

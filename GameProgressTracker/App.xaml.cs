@@ -1,5 +1,6 @@
 ﻿using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
+using GameProgressTracker.Services;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
@@ -40,12 +41,12 @@ namespace GameProgressTracker
         ////
         private AddRegistrationViewModel CreateAddRegistrationViewModel()
         {
-            return new AddRegistrationViewModel(_navigationStore, _platform, CreateRegistrationViewModel);
+            return new AddRegistrationViewModel(_platform, new NavigationService(_navigationStore, CreateRegistrationViewModel));
         }
 
         private RegistrationListingViewModel CreateRegistrationViewModel()
         {
-            return new RegistrationListingViewModel(_navigationStore, _platform, CreateAddRegistrationViewModel);
+            return new RegistrationListingViewModel(_platform, new NavigationService(_navigationStore, CreateAddRegistrationViewModel));
         }
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Services
 {
-    public class NavigationService<TViewModel> where TViewModel : ViewModelBase
+    public class NavigationService
     {
         private readonly NavigationStore _navigationStore;
-        private readonly Func<TViewModel> _createViewModel;
+        private readonly Func<ViewModelBase> _createViewModel;
 
-        public NavigationService(NavigationStore navigationStore, Func<TViewModel> createViewModel)
+        public NavigationService(NavigationStore navigationStore, Func<ViewModelBase> createViewModel)
         {
             _navigationStore = navigationStore;
             _createViewModel = createViewModel;

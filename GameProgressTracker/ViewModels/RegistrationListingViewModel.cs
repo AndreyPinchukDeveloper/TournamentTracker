@@ -15,7 +15,7 @@ namespace GameProgressTracker.ViewModels
     public class RegistrationListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<RegistrationViewModel> _registration;//we don't use Registration class as observable
-                                                                                   //because we nedd class which implement INotifyPropertyChanged
+        private readonly GamePlatform _gamePlatform;                                                                           //because we nedd class which implement INotifyPropertyChanged
 
         public IEnumerable<RegistrationViewModel> Registration => _registration;
 
@@ -23,15 +23,25 @@ namespace GameProgressTracker.ViewModels
         public ICommand AddButtonCommand { get;}
         #endregion
 
-        public RegistrationListingViewModel(NavigationStore navigationStore, GamePlatform gamePlatform, Func<AddRegistrationViewModel> createAddRegistrationViewModel)
+        public RegistrationListingViewModel(GamePlatform gamePlatform, NavigationService navigationService)
         {
+            _gamePlatform = gamePlatform;
             _registration = new ObservableCollection<RegistrationViewModel>();
 
-            AddButtonCommand = new NavigateCommand(navigationStore, createAddRegistrationViewModel);
+            AddButtonCommand = new NavigateCommand(navigationService);
 
-            _registration.Add(new RegistrationViewModel(new Registration(new GameID("SEGA"), "Phantasy Star", DateTime.Now, DateTime.Now)));
-            _registration.Add(new RegistrationViewModel(new Registration(new GameID("SEGA"), "Phantasy Star", DateTime.Now, DateTime.Now)));
-            _registration.Add(new RegistrationViewModel(new Registration(new GameID("SEGA"), "Phantasy Star", DateTime.Now, DateTime.Now)));
+            UpdateRegistrations();
+        }
+
+        private void UpdateRegistrations()
+        {
+            _registration.Clear();
+
+            foreach (Registration registration in _gamePlatform.GetAllRegistrations()) 
+            { 
+                RegistrationViewModel registrationViewModel = new RegistrationViewModel(registration);
+                _registration.Add(registrationViewModel);
+            }
         }
     }
 }

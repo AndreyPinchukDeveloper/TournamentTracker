@@ -1,5 +1,6 @@
 ﻿using GameProgressTracker.Commands;
 using GameProgressTracker.Models;
+using GameProgressTracker.Services;
 using GameProgressTracker.Stores;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace GameProgressTracker.ViewModels
 {
     public class AddRegistrationViewModel : ViewModelBase
     {
+        //private readonly NavigationService _navigationService;
 		private string _currentPlatform;//use list of latforms instead
 		public string CurrentPlatform
 		{
@@ -61,10 +63,10 @@ namespace GameProgressTracker.ViewModels
         public ICommand CancelButtonCommand { get; }
         #endregion
 
-        public AddRegistrationViewModel(NavigationStore navigationStore, GamePlatform platform, Func<RegistrationListingViewModel> createRegistrationViewModel)
+        public AddRegistrationViewModel(GamePlatform platform, NavigationService navigationService)
         {
-            SubmitButtonCommand = new AddRegistrationCommand(this, platform);
-            CancelButtonCommand = new NavigateCommand(navigationStore, createRegistrationViewModel);
+            SubmitButtonCommand = new AddRegistrationCommand(this, platform, navigationService);
+            CancelButtonCommand = new NavigateCommand(navigationService);
         }
     }
 }
