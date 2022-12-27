@@ -8,7 +8,7 @@
         xmlns:vms="clr-namespace:GameProgressTracker.ViewModels"
         mc:Ignorable="d"
         FontSize="14"
-        Title="My Progress" Height="550" Width="600">
+        Title="My Progress" Height="550" Width="900">
     
     <Grid Margin="20" MaxHeight="550" MaxWidth="600">
         

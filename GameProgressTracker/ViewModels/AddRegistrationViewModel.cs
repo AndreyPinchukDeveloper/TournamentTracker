@@ -13,7 +13,6 @@ namespace GameProgressTracker.ViewModels
 {
     public class AddRegistrationViewModel : ViewModelBase
     {
-        //private readonly NavigationService _navigationService;
 		private string _currentPlatform;//use list of latforms instead
 		public string CurrentPlatform
 		{
