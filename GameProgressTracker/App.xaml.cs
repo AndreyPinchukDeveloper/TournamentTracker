@@ -1,8 +1,10 @@
-﻿using GameProgressTracker.Exceptions;
+﻿using GameProgressTracker.DbContexts;
+using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
 using GameProgressTracker.Services;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,6 +20,7 @@ namespace GameProgressTracker
     /// </summary>
     public partial class App : Application
     {
+        private const string CONNECTION_STRING = "Data Source = GameTracker.db";
         private readonly GamePlatform _platform;
         private readonly NavigationStore _navigationStore;
 
@@ -29,6 +32,11 @@ namespace GameProgressTracker
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(CONNECTION_STRING).Options;
+            AppDbContext dbContext = new AppDbContext(options);
+
+            dbContext.Database.Migrate();
+
             _navigationStore.CurrentViewModel = CreateRegistrationViewModel();
             MainWindow = new MainWindow()
             {
