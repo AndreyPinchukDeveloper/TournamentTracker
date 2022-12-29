@@ -32,10 +32,11 @@ namespace GameProgressTracker
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(CONNECTION_STRING).Options;
-            AppDbContext dbContext = new AppDbContext(options);
-
-            dbContext.Database.Migrate();
+            DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(CONNECTION_STRING).Options;//1
+            using(AppDbContext dbContext = new AppDbContext(options))//2
+            {
+                dbContext.Database.Migrate();//3 these 3 strings of code need us to create our first database and keep the information there
+            }
 
             _navigationStore.CurrentViewModel = CreateRegistrationViewModel();
             MainWindow = new MainWindow()

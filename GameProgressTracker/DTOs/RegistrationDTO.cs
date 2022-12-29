@@ -11,6 +11,7 @@ namespace GameProgressTracker.DTOs
     {
         [Key]
         public Guid Id { get; set; }
+        public string GameId { get; set; }
         public string NameOfGame { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
