@@ -1,4 +1,6 @@
 ﻿using GameProgressTracker.Exceptions;
+using GameProgressTracker.Services.RegistrationCreator;
+using GameProgressTracker.Services.ReservationProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +11,21 @@ namespace GameProgressTracker.Models
 {
     public class Progress
     {
-        private readonly List<Registration> _gameToRegistration;
+        private readonly IReservationProvider _reservationProvider;
+        private readonly IRegistrationCreator _registrationCreator;
 
-        public Progress()
+        public Progress(IReservationProvider reservationProvider, IRegistrationCreator registrationCreator)
         {
-            _gameToRegistration = new List<Registration>();
+            _reservationProvider = reservationProvider;
+            _registrationCreator = registrationCreator;
         }
 
-        public IEnumerable<Registration> GetAllRegistrations()
+        public async Task<IEnumerable<Registration>> GetAllRegistrations()
         {
-            return _gameToRegistration;
+            return await _reservationProvider.GetAllRegistrations();
         }
 
-        public void AddRegistration(Registration registration) 
+        public async Task AddRegistration(Registration registration) 
         {
             foreach (Registration existingRegistration in _gameToRegistration)
             {
@@ -31,7 +35,7 @@ namespace GameProgressTracker.Models
                 }
             }
 
-            _gameToRegistration.Add(registration);
+            await _registrationCreator.CreateRegistration(registration);
         }
     }
 }
