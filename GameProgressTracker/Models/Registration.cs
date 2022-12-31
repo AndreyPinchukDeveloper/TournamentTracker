@@ -21,15 +21,5 @@ namespace GameProgressTracker.Models
             StartTime = startTime;  
             EndTime = endTime;
         }
-
-        internal bool Conflicts(Registration registration)
-        {
-            if (registration.GameId != GameId)
-            {
-                return false;
-            }
-
-            return registration.StartTime < EndTime && registration.EndTime > StartTime;
-        }
     }
 }

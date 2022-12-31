@@ -10,10 +10,10 @@ namespace GameProgressTracker.Models
     {
         private readonly Progress _progress;
         public string Name { get; set; }
-        public GamePlatform(string name)
+        public GamePlatform(string name, Progress progress)
         {
             Name = name;
-            _progress = new Progress();
+            _progress = progress;
         }
 
         /// <summary>
@@ -21,18 +21,18 @@ namespace GameProgressTracker.Models
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public IEnumerable<Registration> GetAllRegistrations() 
+        public async Task<IEnumerable<Registration>> GetAllRegistrations() 
         {
-            return _progress.GetAllRegistrations();
+            return await _progress.GetAllRegistrations();
         }
 
         /// <summary>
         /// Make a registration for new game
         /// </summary>
         /// <param name="registration"></param>
-        public void MakeRegistration(Registration registration) 
+        public async Task MakeRegistration(Registration registration) 
         {
-            _progress.AddRegistration(registration);
+            await _progress.AddRegistration(registration);
         }
     }
 }

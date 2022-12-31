@@ -3,14 +3,14 @@ using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
 using GameProgressTracker.Services;
 using GameProgressTracker.ViewModels;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace GameProgressTracker.Commands
 {
-    public class AddRegistrationCommand : CommandBase
+    public class AddRegistrationCommand : AsyncCommandBase
     {
         private readonly GamePlatform _platform;
         private readonly NavigationService _navigationService;
@@ -18,17 +18,6 @@ namespace GameProgressTracker.Commands
 
         /*private readonly ObservableCollection<RegistrationViewModel> _registration;
         public IEnumerable<RegistrationViewModel> Registration => _registration;*/
-        private int _currentID = 1;
-
-        private string CalculateId()
-        {
-            foreach (Registration registration in _platform.GetAllRegistrations())
-            {
-                RegistrationViewModel registrationViewModel = new RegistrationViewModel(registration);
-                _currentID++;
-            }
-            return _currentID.ToString();
-        }
 
         public AddRegistrationCommand(AddRegistrationViewModel addRegistrationViewModel, GamePlatform platform, NavigationService navigationService)
         {
@@ -44,12 +33,10 @@ namespace GameProgressTracker.Commands
             return !string.IsNullOrEmpty(_addRegistrationViewModel.CurrentGame) && base.CanExecute(parameter);
         }
 
-        public override void Execute(object? parameter)
+        public override async Task ExecuteAsync(object? parameter)
         {
-            CalculateId();
-
             Registration registration = new Registration(
-            _currentID.ToString(),
+            _addRegistrationViewModel.GameID,
             _addRegistrationViewModel.CurrentGame,
             _addRegistrationViewModel.StartTime,
             _addRegistrationViewModel.EndTime
@@ -57,7 +44,7 @@ namespace GameProgressTracker.Commands
 
             try
             {
-                _platform.MakeRegistration(registration);
+                await _platform.MakeRegistration(registration);
 
                 MessageBox.Show("The job has done, my lord.", "Succes",
                     MessageBoxButton.OK, MessageBoxImage.Information);
@@ -67,6 +54,11 @@ namespace GameProgressTracker.Commands
             catch (RegistrationConflictException)
             {
                 MessageBox.Show("You have already added that game later, idiot.", "Error", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Failed to make registration.", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

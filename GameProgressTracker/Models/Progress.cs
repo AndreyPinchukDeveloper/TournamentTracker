@@ -1,4 +1,5 @@
 ﻿using GameProgressTracker.Exceptions;
+using GameProgressTracker.Services.RegistrationConflictValidators;
 using GameProgressTracker.Services.RegistrationCreator;
 using GameProgressTracker.Services.ReservationProviders;
 using System;
@@ -13,11 +14,13 @@ namespace GameProgressTracker.Models
     {
         private readonly IReservationProvider _reservationProvider;
         private readonly IRegistrationCreator _registrationCreator;
+        private readonly IRegistrationConflictValidator _registrationConflictValidator;
 
-        public Progress(IReservationProvider reservationProvider, IRegistrationCreator registrationCreator)
+        public Progress(IReservationProvider reservationProvider, IRegistrationCreator registrationCreator, IRegistrationConflictValidator registrationConflictValidator)
         {
             _reservationProvider = reservationProvider;
             _registrationCreator = registrationCreator;
+            _registrationConflictValidator = registrationConflictValidator;
         }
 
         public async Task<IEnumerable<Registration>> GetAllRegistrations()
@@ -27,12 +30,11 @@ namespace GameProgressTracker.Models
 
         public async Task AddRegistration(Registration registration) 
         {
-            foreach (Registration existingRegistration in _gameToRegistration)
+            Registration conflictRegistration = await _registrationConflictValidator.GetConflictingRegistration(registration);
+
+            if (conflictRegistration != null)
             {
-                if (existingRegistration.Conflicts(registration))
-                {
-                    throw new RegistrationConflictException(existingRegistration, registration);
-                }
+                throw new RegistrationConflictException(conflictRegistration, registration);
             }
 
             await _registrationCreator.CreateRegistration(registration);

@@ -13,7 +13,16 @@ namespace GameProgressTracker.ViewModels
 {
     public class AddRegistrationViewModel : ViewModelBase
     {
-		private string _currentPlatform;//use list of latforms instead
+        private string _gameID;
+
+        public string GameID
+        {
+            get { return _gameID; }
+            set { _gameID = value; OnPropertyChanged(nameof(GameID)); }
+        }
+
+
+        private string _currentPlatform;//use list of latforms instead
 		public string CurrentPlatform
 		{
 			get { return _currentPlatform; }

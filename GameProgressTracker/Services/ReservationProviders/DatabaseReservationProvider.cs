@@ -24,7 +24,7 @@ namespace GameProgressTracker.Services.ReservationProviders
             using(AppDbContext context = _dbContextFactory.CreateDbContext()) 
             {
                 IEnumerable<RegistrationDTO> registrationDTOs = await context.Registrations.ToListAsync();
-                registrationDTOs.Select(r => ToRegistration(r));
+                return registrationDTOs.Select(r => ToRegistration(r));
             }
         }
 

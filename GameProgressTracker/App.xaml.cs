@@ -2,6 +2,9 @@
 using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
 using GameProgressTracker.Services;
+using GameProgressTracker.Services.RegistrationConflictValidators;
+using GameProgressTracker.Services.RegistrationCreator;
+using GameProgressTracker.Services.ReservationProviders;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -23,19 +26,26 @@ namespace GameProgressTracker
         private const string CONNECTION_STRING = "Data Source = GameTracker.db";
         private readonly GamePlatform _platform;
         private readonly NavigationStore _navigationStore;
+        private readonly AppDbContextFactory _appDbContextFactory;
 
         public App()
         {
-            _platform = new GamePlatform("PC");//emit the memory for this object(always when we create new object)
+            _appDbContextFactory = new AppDbContextFactory(CONNECTION_STRING);
+            IReservationProvider reservationProvider = new DatabaseReservationProvider(_appDbContextFactory);
+            IRegistrationCreator registrationCreator = new DBRegistrationCreator(_appDbContextFactory);
+            IRegistrationConflictValidator registrationConflictValidator = new DBRegistrationConflictValidator(_appDbContextFactory);
+
+            Progress progress = new Progress(reservationProvider, registrationCreator, registrationConflictValidator);
+
+            _platform = new GamePlatform("PC", progress);//emit the memory for this object(always when we create new object)
             _navigationStore = new NavigationStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(CONNECTION_STRING).Options;//1
-            using(AppDbContext dbContext = new AppDbContext(options))//2
+            using(AppDbContext dbContext = _appDbContextFactory.CreateDbContext())//2
             {
-                dbContext.Database.Migrate();//3 these 3 strings of code need us to create our first database and keep the information there
+                dbContext.Database.Migrate();// this string of code need us to create our first database and keep the information there
             }
 
             _navigationStore.CurrentViewModel = CreateRegistrationViewModel();
@@ -55,7 +65,7 @@ namespace GameProgressTracker
 
         private RegistrationListingViewModel CreateRegistrationViewModel()
         {
-            return new RegistrationListingViewModel(_platform, new NavigationService(_navigationStore, CreateAddRegistrationViewModel));
+            return RegistrationListingViewModel.LoadViewModel(_platform, new NavigationService(_navigationStore, CreateAddRegistrationViewModel));
         }
     }
 }

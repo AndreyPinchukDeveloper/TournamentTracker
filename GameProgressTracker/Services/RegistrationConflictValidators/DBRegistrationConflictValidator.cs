@@ -19,17 +19,27 @@ namespace GameProgressTracker.Services.RegistrationConflictValidators
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<bool> DoesCauseConflict(Registration registration)
+        public async Task<Registration> GetConflictingRegistration(Registration registration)
         {
             using(AppDbContext context = _dbContextFactory.CreateDbContext()) 
             {
-                return await context.Registrations.Select(r => ToRegistration(r)).AnyAsync(r => r.Conflicts(registration));
+                RegistrationDTO registrationDTO = await context.Registrations
+                    .Where(r => r.GameId == registration.GameId)
+                    .Where(r => r.NameOfGame == registration.NameOfGame)
+                    .FirstOrDefaultAsync();
+
+                if (registrationDTO == null)
+                {
+                    return null;
+                }
+
+                return ToRegistration(registrationDTO);
             }
         }
 
-        private object ToRegistration(RegistrationDTO r)
+        private static Registration ToRegistration(RegistrationDTO r)
         {
-            throw new NotImplementedException();
+            return new Registration(r.GameId,r.NameOfGame,r.StartTime,r.EndTime);
         }
     }
 }

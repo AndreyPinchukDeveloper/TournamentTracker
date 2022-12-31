@@ -9,6 +9,6 @@ namespace GameProgressTracker.Services.RegistrationConflictValidators
 {
     public interface IRegistrationConflictValidator
     {
-        Task<bool> DoesCauseConflict(Registration registration);
+        Task<Registration> GetConflictingRegistration(Registration registration);
     }
 }
