@@ -22,14 +22,14 @@ namespace GameProgressTracker.ViewModels
         }
 
 
-        private string _currentPlatform;//use list of latforms instead
-		public string CurrentPlatform
+        private string _nameOfPlatform;
+		public string NameOfPlatform
 		{
-			get { return _currentPlatform; }
+			get { return _nameOfPlatform; }
 			set 
 			{
-				_currentPlatform = value;
-               OnPropertyChanged(nameof(CurrentPlatform)); //nameof return not value but only name of object
+				_nameOfPlatform = value;
+               OnPropertyChanged(nameof(NameOfPlatform)); //nameof return not value but only name of object
 			}
 		}
 

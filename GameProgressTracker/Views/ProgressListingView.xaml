@@ -49,6 +49,14 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
+                    <GridViewColumn Header="Platform">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NameOfPlatform}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                     <GridViewColumn Header="Name of game">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

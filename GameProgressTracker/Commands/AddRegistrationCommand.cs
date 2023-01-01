@@ -36,6 +36,7 @@ namespace GameProgressTracker.Commands
         public override async Task ExecuteAsync(object? parameter)
         {
             Registration registration = new Registration(
+            _addRegistrationViewModel.NameOfPlatform,
             _addRegistrationViewModel.GameID,
             _addRegistrationViewModel.CurrentGame,
             _addRegistrationViewModel.StartTime,

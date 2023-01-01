@@ -31,6 +31,7 @@ namespace GameProgressTracker.Services.ReservationProviders
         private static Registration ToRegistration(RegistrationDTO r)
         {
             return new Registration(
+                    r.NameOfPlatform,
                     r.GameId,
                     r.NameOfGame,
                     r.StartTime,

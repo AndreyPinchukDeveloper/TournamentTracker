@@ -39,7 +39,7 @@ namespace GameProgressTracker.Services.RegistrationConflictValidators
 
         private static Registration ToRegistration(RegistrationDTO r)
         {
-            return new Registration(r.GameId,r.NameOfGame,r.StartTime,r.EndTime);
+            return new Registration(r.NameOfPlatform, r.GameId,r.NameOfGame,r.StartTime,r.EndTime);
         }
     }
 }

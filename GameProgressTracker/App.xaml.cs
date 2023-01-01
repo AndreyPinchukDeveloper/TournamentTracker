@@ -37,7 +37,7 @@ namespace GameProgressTracker
 
             Progress progress = new Progress(reservationProvider, registrationCreator, registrationConflictValidator);
 
-            _platform = new GamePlatform("PC", progress);//emit the memory for this object(always when we create new object)
+            _platform = new GamePlatform(progress);//emit the memory for this object(always when we create new object)
             _navigationStore = new NavigationStore();
         }
 

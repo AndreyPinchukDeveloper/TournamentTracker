@@ -11,12 +11,8 @@ namespace GameProgressTracker.DbContexts
 {
     public class AppDbContext:DbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
+        public AppDbContext(DbContextOptions options) : base(options) { }
         public DbSet<RegistrationDTO> Registrations { get; set; }
-        
     }
 
 }

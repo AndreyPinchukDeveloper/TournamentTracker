@@ -9,10 +9,8 @@ namespace GameProgressTracker.Models
     public class GamePlatform
     {
         private readonly Progress _progress;
-        public string Name { get; set; }
-        public GamePlatform(string name, Progress progress)
+        public GamePlatform(Progress progress)
         {
-            Name = name;
             _progress = progress;
         }
 
