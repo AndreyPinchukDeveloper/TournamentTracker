@@ -32,7 +32,7 @@ namespace GameProgressTracker.Services.ReservationProviders
         {
             return new Registration(
                     r.NameOfPlatform,
-                    r.GameId,
+                    r.GameID,
                     r.NameOfGame,
                     r.StartTime,
                     r.EndTime);

@@ -24,7 +24,6 @@ namespace GameProgressTracker.Services.RegistrationConflictValidators
             using(AppDbContext context = _dbContextFactory.CreateDbContext()) 
             {
                 RegistrationDTO registrationDTO = await context.Registrations
-                    .Where(r => r.GameId == registration.GameId)
                     .Where(r => r.NameOfGame == registration.NameOfGame)
                     .FirstOrDefaultAsync();
 
@@ -39,7 +38,7 @@ namespace GameProgressTracker.Services.RegistrationConflictValidators
 
         private static Registration ToRegistration(RegistrationDTO r)
         {
-            return new Registration(r.NameOfPlatform, r.GameId,r.NameOfGame,r.StartTime,r.EndTime);
+            return new Registration(r.NameOfPlatform, r.GameID,r.NameOfGame,r.StartTime,r.EndTime);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace GameProgressTracker.Services.RegistrationCreator
             return new RegistrationDTO()
             {
                 NameOfPlatform= r.NameOfPlatform,
-                GameId= r.GameId,
+                GameID= r.GameID,
                 NameOfGame = r.NameOfGame,
                 StartTime= r.StartTime,
                 EndTime= r.EndTime

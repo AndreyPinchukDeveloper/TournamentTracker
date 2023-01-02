@@ -8,7 +8,7 @@ namespace GameProgressTracker.Models
 {
     public class Registration
     {
-        public string GameId { get;}
+        public string GameID { get;}
         public string NameOfPlatform { get; }
         public string NameOfGame { get;} 
         public DateTime StartTime { get;}
@@ -18,7 +18,7 @@ namespace GameProgressTracker.Models
         public Registration(string nameOfPlatform, string gameID, string nameOfGame, DateTime startTime, DateTime endTime)
         {
             NameOfPlatform = nameOfPlatform;
-            GameId = gameID;
+            GameID = gameID;
             NameOfGame = nameOfGame;
             StartTime = startTime;  
             EndTime = endTime;
