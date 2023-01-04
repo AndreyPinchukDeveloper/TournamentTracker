@@ -24,7 +24,8 @@ namespace GameProgressTracker
     public partial class App : Application
     {
         private const string CONNECTION_STRING = "Data Source = GameTracker.db";
-        private readonly GamePlatform _platform;
+        private readonly Game _game;
+        private readonly GamesStore _gameStore;
         private readonly NavigationStore _navigationStore;
         private readonly AppDbContextFactory _appDbContextFactory;
 
@@ -37,7 +38,8 @@ namespace GameProgressTracker
 
             Progress progress = new Progress(reservationProvider, registrationCreator, registrationConflictValidator);
 
-            _platform = new GamePlatform(progress);//emit the memory for this object(always when we create new object)
+            _gameStore = new GamesStore(_game);
+            _game = new Game(progress);//emit the memory for this object(always when we create new object)
             _navigationStore = new NavigationStore();
         }
 
@@ -57,15 +59,16 @@ namespace GameProgressTracker
 
             base.OnStartup(e);
         }
-        ////
+
+
         private AddRegistrationViewModel CreateAddRegistrationViewModel()
         {
-            return new AddRegistrationViewModel(_platform, new NavigationService(_navigationStore, CreateRegistrationViewModel));
+            return new AddRegistrationViewModel(_gameStore, new NavigationService(_navigationStore, CreateRegistrationViewModel));
         }
 
         private RegistrationListingViewModel CreateRegistrationViewModel()
         {
-            return RegistrationListingViewModel.LoadViewModel(_platform, new NavigationService(_navigationStore, CreateAddRegistrationViewModel));
+            return RegistrationListingViewModel.LoadViewModel(_gameStore, new NavigationService(_navigationStore, CreateAddRegistrationViewModel));
         }
     }
 }

@@ -2,6 +2,7 @@
 using GameProgressTracker.Exceptions;
 using GameProgressTracker.Models;
 using GameProgressTracker.Services;
+using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
 using System.ComponentModel;
@@ -12,16 +13,16 @@ namespace GameProgressTracker.Commands
 {
     public class AddRegistrationCommand : AsyncCommandBase
     {
-        private readonly GamePlatform _platform;
+        private readonly GamesStore _gameStore;
         private readonly NavigationService _navigationService;
         private readonly AddRegistrationViewModel _addRegistrationViewModel;
 
         /*private readonly ObservableCollection<RegistrationViewModel> _registration;
         public IEnumerable<RegistrationViewModel> Registration => _registration;*/
 
-        public AddRegistrationCommand(AddRegistrationViewModel addRegistrationViewModel, GamePlatform platform, NavigationService navigationService)
+        public AddRegistrationCommand(AddRegistrationViewModel addRegistrationViewModel, GamesStore gameStore, NavigationService navigationService)
         {
-            _platform = platform;
+            _gameStore = gameStore;
             _navigationService = navigationService;
             _addRegistrationViewModel = addRegistrationViewModel;
 
@@ -45,7 +46,7 @@ namespace GameProgressTracker.Commands
 
             try
             {
-                await _platform.MakeRegistration(registration);
+                await _gameStore.MakeRegistration(registration);
 
                 MessageBox.Show("The job has done, my lord.", "Succes",
                     MessageBoxButton.OK, MessageBoxImage.Information);

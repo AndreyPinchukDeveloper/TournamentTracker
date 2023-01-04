@@ -17,23 +17,24 @@ namespace GameProgressTracker.ViewModels
         private readonly ObservableCollection<RegistrationViewModel> _registration;//we don't use Registration class as observable                                                                          //because we nedd class which implement INotifyPropertyChanged
 
         public IEnumerable<RegistrationViewModel> Registration => _registration;
+        public AddRegistrationViewModel AddRegistrationViewModel;
 
         #region Commands
         public ICommand LoadRegistrationCommand { get; }
         public ICommand AddButtonCommand { get; }
         #endregion
 
-        public RegistrationListingViewModel(GamePlatform gamePlatform, NavigationService navigationService)
+        public RegistrationListingViewModel(GamesStore appStore, NavigationService navigationService)
         {
             _registration = new ObservableCollection<RegistrationViewModel>();
 
-            LoadRegistrationCommand = new LoadRegistrationsCommand(this, gamePlatform);
+            LoadRegistrationCommand = new LoadRegistrationsCommand(this, appStore);
             AddButtonCommand = new NavigateCommand(navigationService);
         }
 
-        public static RegistrationListingViewModel LoadViewModel(GamePlatform gamePlatform, NavigationService makeRegistrationNavigationService)
+        public static RegistrationListingViewModel LoadViewModel(GamesStore appStore, NavigationService makeRegistrationNavigationService)
         {
-            RegistrationListingViewModel viewModel = new RegistrationListingViewModel(gamePlatform, makeRegistrationNavigationService);
+            RegistrationListingViewModel viewModel = new RegistrationListingViewModel(appStore, makeRegistrationNavigationService);
 
             viewModel.LoadRegistrationCommand.Execute(null);
 

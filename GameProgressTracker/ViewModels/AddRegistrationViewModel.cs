@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Windows.Input; 
 
 namespace GameProgressTracker.ViewModels
 {
@@ -71,9 +71,9 @@ namespace GameProgressTracker.ViewModels
         public ICommand CancelButtonCommand { get; }
         #endregion
 
-        public AddRegistrationViewModel(GamePlatform platform, NavigationService navigationService)
+        public AddRegistrationViewModel(GamesStore gameStore, NavigationService navigationService)
         {
-            SubmitButtonCommand = new AddRegistrationCommand(this, platform, navigationService);
+            SubmitButtonCommand = new AddRegistrationCommand(this, gameStore, navigationService);
             CancelButtonCommand = new NavigateCommand(navigationService);
         }
     }

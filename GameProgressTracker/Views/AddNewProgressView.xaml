@@ -34,6 +34,13 @@
                 Width="150"
                 HorizontalAlignment="left"
                 Text="{Binding NameOfPlatform, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBox
+                Grid.Row="1"
+                Margin="200 5 0 0"
+                Width="150"
+                HorizontalAlignment="left"
+                Text="{Binding GameID, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="2" Margin="10 10 0 0">

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Models
 {
-    public class GamePlatform
+    public class Game
     {
         private readonly Progress _progress;
-        public GamePlatform(Progress progress)
+        public Game(Progress progress)
         {
             _progress = progress;
         }

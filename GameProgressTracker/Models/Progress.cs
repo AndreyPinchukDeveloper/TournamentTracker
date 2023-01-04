@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Models
 {
+    /// <summary>
+    /// Hold all registrations
+    /// </summary>
     public class Progress
     {
         private readonly IReservationProvider _reservationProvider;

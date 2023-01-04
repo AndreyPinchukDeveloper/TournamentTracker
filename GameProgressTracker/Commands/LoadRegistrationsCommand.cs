@@ -1,5 +1,6 @@
 ﻿using GameProgressTracker.Commands.Base;
 using GameProgressTracker.Models;
+using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,20 @@ namespace GameProgressTracker.Commands
     public class LoadRegistrationsCommand : AsyncCommandBase
     {
         private readonly RegistrationListingViewModel _viewModel;
-        private readonly GamePlatform _gamePlatform;
+        private readonly GamesStore _appStore;
 
-        public LoadRegistrationsCommand(RegistrationListingViewModel viewModel, GamePlatform gamePlatform)
+        public LoadRegistrationsCommand(RegistrationListingViewModel viewModel, GamesStore appStore)
         {
             _viewModel = viewModel;
-            _gamePlatform = gamePlatform;
+            _appStore = appStore;
         }
 
         public override async Task ExecuteAsync(object? parameter)
         {
             try
             {
-                IEnumerable<Registration> registrations = await _gamePlatform.GetAllRegistrations();
-                _viewModel.UpdateRegistrations(registrations);
+                await _appStore.Load();
+                _viewModel.UpdateRegistrations(_appStore.Registration);
             }
             catch (Exception)
             {

@@ -8,7 +8,7 @@ namespace GameProgressTracker.Models
 {
     public class GameID
     {
-        public string NameOfGame { get;}
+        /*public string NameOfGame { get;}
 
         public GameID(string nameOfGame)
         {
@@ -44,6 +44,6 @@ namespace GameProgressTracker.Models
         public static bool operator !=(GameID left, GameID right)
         {
             return !(left == right);
-        }
+        }*/
     }
 }
