@@ -37,9 +37,9 @@ namespace GameProgressTracker
             IRegistrationConflictValidator registrationConflictValidator = new DBRegistrationConflictValidator(_appDbContextFactory);
 
             Progress progress = new Progress(reservationProvider, registrationCreator, registrationConflictValidator);
-
-            _gameStore = new GamesStore(_game);
+            
             _game = new Game(progress);//emit the memory for this object(always when we create new object)
+            _gameStore = new GamesStore(_game);
             _navigationStore = new NavigationStore();
         }
 
@@ -68,7 +68,7 @@ namespace GameProgressTracker
 
         private RegistrationListingViewModel CreateRegistrationViewModel()
         {
-            return RegistrationListingViewModel.LoadViewModel(_gameStore, new NavigationService(_navigationStore, CreateAddRegistrationViewModel));
+            return RegistrationListingViewModel.LoadViewModel(_gameStore, new NavigationService(_navigationStore, CreateAddRegistrationViewModel), CreateAddRegistrationViewModel());
         }
     }
 }

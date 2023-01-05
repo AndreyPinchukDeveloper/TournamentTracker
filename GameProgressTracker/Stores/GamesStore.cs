@@ -17,13 +17,14 @@ namespace GameProgressTracker.Stores
         private readonly Lazy<Task> _initializeLazy;//Lazy class is our guarantee that class creates only once
 
         public IEnumerable<Registration> Registration => _registration;
+        public event Action<Registration> MadeRegistration;
 
         public GamesStore(Game game)
         {
             _game = game;
-            _initializeLazy = new Lazy<Task>(Initialize());
-
             _registration = new List<Registration>();
+            _initializeLazy = new Lazy<Task>(Initialize());
+            
         }
 
         public async Task Load()
@@ -35,6 +36,12 @@ namespace GameProgressTracker.Stores
         {
             await _game.MakeRegistration(registration);
             _registration.Add(registration);
+            OnRegistrationMade(registration);
+        }
+
+        private void OnRegistrationMade(Registration registration)
+        {
+            MadeRegistration?.Invoke(registration);
         }
 
         public async Task Initialize()

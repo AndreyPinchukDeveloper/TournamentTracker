@@ -9,18 +9,20 @@
         mc:Ignorable="d"
         FontSize="14"
         Title="My Progress" Height="550" Width="900">
-    
-    <Grid Margin="20" MaxHeight="550" MaxWidth="600">
-        
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type vms:AddRegistrationViewModel}">
-                <views:AddNewProgressView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:RegistrationListingViewModel}">
-                <views:ProgressListingView/>
-            </DataTemplate>
-        </Grid.Resources>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
-    </Grid>
+    <ScrollViewer>
+        <Grid Margin="20" MaxHeight="550" MaxWidth="600">
+
+            <Grid.Resources>
+                <DataTemplate DataType="{x:Type vms:AddRegistrationViewModel}">
+                    <views:AddNewProgressView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vms:RegistrationListingViewModel}">
+                    <views:ProgressListingView/>
+                </DataTemplate>
+            </Grid.Resources>
+
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+    </ScrollViewer>
 </Window>

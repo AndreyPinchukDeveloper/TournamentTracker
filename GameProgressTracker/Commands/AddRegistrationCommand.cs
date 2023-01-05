@@ -51,7 +51,7 @@ namespace GameProgressTracker.Commands
                 MessageBox.Show("The job has done, my lord.", "Succes",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
-                _navigationService.Navigate();
+                //_navigationService.Navigate();
             }
             catch (RegistrationConflictException)
             {
