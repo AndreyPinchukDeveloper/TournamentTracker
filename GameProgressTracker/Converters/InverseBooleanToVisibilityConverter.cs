@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
 
 namespace GameProgressTracker.Converters
 {
-    internal class InverseBooleanToVisibilityConverter
+    /// <summary>
+    /// This class convert bool value IsLoading to 
+    /// </summary>
+    public class InverseBooleanToVisibilityConverter : IValueConverter
     {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is bool boolValue && boolValue ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

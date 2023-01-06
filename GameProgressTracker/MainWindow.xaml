@@ -10,7 +10,7 @@
         FontSize="14"
         Title="My Progress" Height="550" Width="900">
 
-    <ScrollViewer>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="20" MaxHeight="550" MaxWidth="600">
 
             <Grid.Resources>
