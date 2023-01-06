@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GameProgressTracker.Stores
 {
     /// <summary>
-    /// This class need us to load and show all registration from db to UI 
+    /// This class need us to load and show all registration(existing data) from db to UI
     /// </summary>
     public class GamesStore
     {
@@ -27,7 +27,7 @@ namespace GameProgressTracker.Stores
             
         }
 
-        public async Task Load()
+        public async Task Load()//load all data from db
         {
             await _initializeLazy.Value;//value is our task
         }

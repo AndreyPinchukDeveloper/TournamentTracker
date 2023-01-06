@@ -14,10 +14,19 @@ namespace GameProgressTracker.ViewModels
 {
     public class RegistrationListingViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<RegistrationViewModel> _registration;//we don't use Registration class as observable                                                                          //because we nedd class which implement INotifyPropertyChanged
-
+        private readonly ObservableCollection<RegistrationViewModel> _registration;//we don't use Registration class as observable because we nedd class which implement INotifyPropertyChanged
+        private readonly GamesStore _gameStore;
         public IEnumerable<RegistrationViewModel> Registration => _registration;
         public AddRegistrationViewModel AddRegistrationViewModel { get; }
+
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { _isLoading = value; OnPropertyChanged(nameof(IsLoading)); }
+        }
+
 
         #region Commands
         public ICommand LoadRegistrationCommand { get; }
@@ -29,12 +38,19 @@ namespace GameProgressTracker.ViewModels
             AddRegistrationViewModel addRegistrationViewModel, 
             NavigationService navigationService)
         {
+            _gameStore = gameStore;
             _registration = new ObservableCollection<RegistrationViewModel>();
             AddRegistrationViewModel = addRegistrationViewModel;
             
             LoadRegistrationCommand = new LoadRegistrationsCommand(this, gameStore);
             AddButtonCommand = new NavigateCommand(navigationService);
-            gameStore.MadeRegistration += OnRegistrationMade;
+            _gameStore.MadeRegistration += OnRegistrationMade;
+        }
+
+        public override void Dispose()
+        {
+            _gameStore.MadeRegistration -= OnRegistrationMade;
+            base.Dispose();
         }
 
         private void OnRegistrationMade(Registration registration)
