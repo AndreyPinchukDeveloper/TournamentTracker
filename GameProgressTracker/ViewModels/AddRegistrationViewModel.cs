@@ -47,7 +47,7 @@ namespace GameProgressTracker.ViewModels
             }
         }
 
-        private DateTime _startTime = new DateTime(2023, 1, 1);
+        private DateTime _startTime;
 		public DateTime StartTime
         {
             get { return _startTime; }
@@ -58,14 +58,17 @@ namespace GameProgressTracker.ViewModels
             }
         }
 
-        private DateTime _endTime = new DateTime(2023, 1, 1);
+        private DateTime _endTime;
   
         public DateTime EndTime
         {
             get { return _endTime; }
             set
             {
-                _proretyNameToErrorsDictionary.Remove(nameof(EndTime));
+                _endTime = value;
+                OnPropertyChanged(nameof(EndTime));
+
+                _propetyNameToErrorsDictionary.Remove(nameof(EndTime));
 
                 if (EndTime<StartTime)
                 {
@@ -73,12 +76,11 @@ namespace GameProgressTracker.ViewModels
                     {
                         "The end date can't be before start date."
                     };
-                    _proretyNameToErrorsDictionary.Add(nameof(EndTime), endDataErrors);
+                    _propetyNameToErrorsDictionary.Add(nameof(EndTime), endDataErrors);
                     ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(EndTime)));
                 }
 
-                _endTime = value;
-                OnPropertyChanged(nameof(EndTime));
+                
             }
         }
         #endregion
@@ -86,9 +88,10 @@ namespace GameProgressTracker.ViewModels
         public ICommand SubmitButtonCommand { get; }
         public ICommand CancelButtonCommand { get; }
 
-        private readonly Dictionary<string, List<string>> _proretyNameToErrorsDictionary;
+        private readonly Dictionary<string, List<string>> _propetyNameToErrorsDictionary = new Dictionary<string, List<string>>();
 
-        public bool HasErrors => _proretyNameToErrorsDictionary.Any();
+        public bool HasErrors => _propetyNameToErrorsDictionary.Any();// The Any() method is cheking if there are existing alements
+
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;//when we add error we call this event
 
         public AddRegistrationViewModel(GamesStore gameStore, NavigationService navigationService)
@@ -99,7 +102,7 @@ namespace GameProgressTracker.ViewModels
 
         public IEnumerable GetErrors(string? propertyName)
         {
-            return _proretyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
+            return _propetyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
         }
     }
 }

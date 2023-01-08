@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameProgressTracker.Views"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -78,7 +79,10 @@
                 Margin="0 5 0 0"
                 Width="100"
                 HorizontalAlignment="Left"
-                Text="{Binding StartTime, UpdateSourceTrigger=PropertyChanged}"/>
+                SelectedDate="{
+                Binding StartTime, 
+                UpdateSourceTrigger=PropertyChanged, 
+                TargetNullValue={x:Static System:DateTime.Now}}"/>
             <TextBlock
                 Margin="20 0 0 0"
                 Grid.Row="0" 
@@ -90,7 +94,7 @@
                 Margin="20 5 0 0"
                 Width="100"
                 HorizontalAlignment="Left"
-                Text="{Binding EndTime, UpdateSourceTrigger=PropertyChanged}"/>
+                SelectedDate="{Binding EndTime, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static System:DateTime.Now}}"/>
             
         </Grid>
 
