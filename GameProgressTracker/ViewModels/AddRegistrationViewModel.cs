@@ -55,6 +55,14 @@ namespace GameProgressTracker.ViewModels
             {
                 _startTime = value;
                 OnPropertyChanged(nameof(StartTime));
+                ClearErrors(nameof(StartTime));
+                ClearErrors(nameof(EndTime));
+
+                if (EndTime < StartTime)
+                {
+                    AddError("The start date can't be after end date.", nameof(StartTime));
+                    OnErrorsChanged(nameof(StartTime));
+                }
             }
         }
 
@@ -67,22 +75,17 @@ namespace GameProgressTracker.ViewModels
             {
                 _endTime = value;
                 OnPropertyChanged(nameof(EndTime));
+                ClearErrors(nameof(StartTime));
+                ClearErrors(nameof(EndTime));               
 
-                _propetyNameToErrorsDictionary.Remove(nameof(EndTime));
-
-                if (EndTime<StartTime)
+                if (EndTime < StartTime)
                 {
-                    List<string> endDataErrors = new List<string>()
-                    {
-                        "The end date can't be before start date."
-                    };
-                    _propetyNameToErrorsDictionary.Add(nameof(EndTime), endDataErrors);
-                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(EndTime)));
+                    AddError("The end date can't be before start date.", nameof(EndTime));                    
+                    OnErrorsChanged(nameof(EndTime));                   
                 }
-
-                
             }
         }
+
         #endregion
 
         public ICommand SubmitButtonCommand { get; }
@@ -103,6 +106,28 @@ namespace GameProgressTracker.ViewModels
         public IEnumerable GetErrors(string? propertyName)
         {
             return _propetyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
+        }
+
+        private void AddError(string errorMessage, string propertyName)
+        {
+            if (!_propetyNameToErrorsDictionary.ContainsKey(propertyName))
+            {
+                _propetyNameToErrorsDictionary.Add(propertyName, new List<string>());
+            }
+            _propetyNameToErrorsDictionary[propertyName].Add(errorMessage);
+
+            OnErrorsChanged(propertyName);
+        }
+
+        private void ClearErrors(string propertyName)
+        {
+            _propetyNameToErrorsDictionary.Remove(propertyName);
+            OnErrorsChanged(propertyName);
+        }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+           ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(propertyName)));
         }
     }
 }
