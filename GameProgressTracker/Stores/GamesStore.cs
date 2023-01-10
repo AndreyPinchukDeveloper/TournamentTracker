@@ -14,7 +14,7 @@ namespace GameProgressTracker.Stores
     {
         private readonly Game _game;
         private readonly List<Registration> _registration; 
-        private readonly Lazy<Task> _initializeLazy;//Lazy class is our guarantee that class creates only once
+        private Lazy<Task> _initializeLazy;//Lazy class is our guarantee that class creates only once
 
         public IEnumerable<Registration> Registration => _registration;
         public event Action<Registration> MadeRegistration;
@@ -22,14 +22,23 @@ namespace GameProgressTracker.Stores
         public GamesStore(Game game)
         {
             _game = game;
-            _registration = new List<Registration>();
-            _initializeLazy = new Lazy<Task>(Initialize());
             
+            _initializeLazy = new Lazy<Task>(Initialize());
+            _registration = new List<Registration>();
+
         }
 
         public async Task Load()//load all data from db
         {
-            await _initializeLazy.Value;//value is our task
+            try
+            {
+                await _initializeLazy.Value;//value is our task
+            }
+            catch (Exception)
+            {
+                _initializeLazy = new Lazy<Task>(Initialize());
+                throw;
+            }            
         }
 
         public async Task MakeRegistration(Registration registration)
@@ -50,6 +59,8 @@ namespace GameProgressTracker.Stores
 
             _registration.Clear();
             _registration.AddRange(registrations);
+
+            throw new Exception();
         }
     }
 }

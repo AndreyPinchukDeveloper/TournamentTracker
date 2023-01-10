@@ -24,18 +24,17 @@ namespace GameProgressTracker.Commands
 
         public override async Task ExecuteAsync(object? parameter)
         {
+            _viewModel.ErrorMessage= string.Empty;
             _viewModel.IsLoading = true;
             try
             {
-
                 await _appStore.Load();
                 _viewModel.UpdateRegistrations(_appStore.Registration);
+
             }
             catch (Exception)
             {
-
-                MessageBox.Show("Failed to load registration.", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ErrorMessage = "Failed to load registration.";
             }
 
             _viewModel.IsLoading = false;

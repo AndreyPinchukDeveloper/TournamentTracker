@@ -61,7 +61,7 @@ namespace GameProgressTracker.ViewModels
                 if (EndTime < StartTime)
                 {
                     AddError("The start date can't be after end date.", nameof(StartTime));
-                    OnErrorsChanged(nameof(StartTime));
+                    //OnErrorsChanged(nameof(StartTime));
                 }
             }
         }
@@ -81,7 +81,7 @@ namespace GameProgressTracker.ViewModels
                 if (EndTime < StartTime)
                 {
                     AddError("The end date can't be before start date.", nameof(EndTime));                    
-                    OnErrorsChanged(nameof(EndTime));                   
+                    //OnErrorsChanged(nameof(EndTime));                   
                 }
             }
         }

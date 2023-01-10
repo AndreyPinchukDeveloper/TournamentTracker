@@ -19,14 +19,23 @@ namespace GameProgressTracker.ViewModels
         public IEnumerable<RegistrationViewModel> Registration => _registration;
         public AddRegistrationViewModel AddRegistrationViewModel { get; }
 
-        private bool _isLoading;
+        #region Properties
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); OnPropertyChanged(nameof(HasErrorMessage)); }
+        }
 
+        private bool _isLoading;
         public bool IsLoading
         {
             get { return _isLoading; }
             set { _isLoading = value; OnPropertyChanged(nameof(IsLoading)); }
         }
 
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+        #endregion
 
         #region Commands
         public ICommand LoadRegistrationCommand { get; }
