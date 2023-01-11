@@ -14,13 +14,16 @@ namespace GameProgressTracker.Commands
     public class AddRegistrationCommand : AsyncCommandBase
     {
         private readonly GamesStore _gameStore;
-        private readonly NavigationService _navigationService;
+        private readonly NavigationService<RegistrationListingViewModel> _navigationService;
         private readonly AddRegistrationViewModel _addRegistrationViewModel;
 
         /*private readonly ObservableCollection<RegistrationViewModel> _registration;
         public IEnumerable<RegistrationViewModel> Registration => _registration;*/
 
-        public AddRegistrationCommand(AddRegistrationViewModel addRegistrationViewModel, GamesStore gameStore, NavigationService navigationService)
+        public AddRegistrationCommand(
+            AddRegistrationViewModel addRegistrationViewModel, 
+            GamesStore gameStore, 
+            NavigationService<RegistrationListingViewModel> navigationService)
         {
             _gameStore = gameStore;
             _navigationService = navigationService;

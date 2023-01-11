@@ -97,10 +97,10 @@ namespace GameProgressTracker.ViewModels
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;//when we add error we call this event
 
-        public AddRegistrationViewModel(GamesStore gameStore, NavigationService navigationService)
+        public AddRegistrationViewModel(GamesStore gameStore, NavigationService<RegistrationListingViewModel> navigationService)
         {
             SubmitButtonCommand = new AddRegistrationCommand(this, gameStore, navigationService);
-            CancelButtonCommand = new NavigateCommand(navigationService);
+            CancelButtonCommand = new NavigateCommand<RegistrationListingViewModel>(navigationService);
         }
 
         public IEnumerable GetErrors(string? propertyName)

@@ -59,8 +59,6 @@ namespace GameProgressTracker.Stores
 
             _registration.Clear();
             _registration.AddRange(registrations);
-
-            throw new Exception();
         }
     }
 }

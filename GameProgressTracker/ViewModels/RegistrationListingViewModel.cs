@@ -43,16 +43,14 @@ namespace GameProgressTracker.ViewModels
         #endregion
 
         public RegistrationListingViewModel(
-            GamesStore gameStore, 
-            AddRegistrationViewModel addRegistrationViewModel, 
-            NavigationService navigationService)
+            GamesStore gameStore,
+            NavigationService<AddRegistrationViewModel> navigationService)
         {
             _gameStore = gameStore;
             _registration = new ObservableCollection<RegistrationViewModel>();
-            AddRegistrationViewModel = addRegistrationViewModel;
             
             LoadRegistrationCommand = new LoadRegistrationsCommand(this, gameStore);
-            AddButtonCommand = new NavigateCommand(navigationService);
+            AddButtonCommand = new NavigateCommand<AddRegistrationViewModel>(navigationService);
             _gameStore.MadeRegistration += OnRegistrationMade;
         }
 
@@ -70,10 +68,9 @@ namespace GameProgressTracker.ViewModels
 
         public static RegistrationListingViewModel LoadViewModel(
             GamesStore appStore, 
-            NavigationService makeRegistrationNavigationService,
-            AddRegistrationViewModel addRegistrationViewModel)
+            NavigationService<AddRegistrationViewModel> makeRegistrationNavigationService)
         {
-            RegistrationListingViewModel viewModel = new RegistrationListingViewModel(appStore, addRegistrationViewModel, makeRegistrationNavigationService);
+            RegistrationListingViewModel viewModel = new RegistrationListingViewModel(appStore, makeRegistrationNavigationService);
 
             viewModel.LoadRegistrationCommand.Execute(null);
 
