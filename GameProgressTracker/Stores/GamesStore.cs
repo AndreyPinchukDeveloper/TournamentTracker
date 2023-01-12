@@ -22,9 +22,9 @@ namespace GameProgressTracker.Stores
         public GamesStore(Game game)
         {
             _game = game;
-            
-            _initializeLazy = new Lazy<Task>(Initialize());
             _registration = new List<Registration>();
+            _initializeLazy = new Lazy<Task>(Initialize());
+            
 
         }
 

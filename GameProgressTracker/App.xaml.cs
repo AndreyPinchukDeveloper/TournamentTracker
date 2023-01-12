@@ -1,5 +1,6 @@
 ﻿using GameProgressTracker.DbContexts;
 using GameProgressTracker.Exceptions;
+using GameProgressTracker.HostBuilders;
 using GameProgressTracker.Models;
 using GameProgressTracker.Services;
 using GameProgressTracker.Services.RegistrationConflictValidators;
@@ -8,6 +9,7 @@ using GameProgressTracker.Services.ReservationProviders;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -25,7 +27,6 @@ namespace GameProgressTracker
     /// </summary>
     public partial class App : Application
     {
-        private const string CONNECTION_STRING = "Data Source = GameTracker.db";
         /*private readonly Game _game;
         private readonly GamesStore _gameStore;
         private readonly NavigationStore _navigationStore;
@@ -34,9 +35,13 @@ namespace GameProgressTracker
 
         public App()
         {
-            _host = Host.CreateDefaultBuilder().ConfigureServices(services =>
+            _host = Host.CreateDefaultBuilder()
+                .AddViewModels()
+                .ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton(new AppDbContextFactory(CONNECTION_STRING));
+                string connectionString = hostContext.Configuration.GetConnectionString("Default");
+
+                services.AddSingleton(new AppDbContextFactory(connectionString));
                 services.AddSingleton<IReservationProvider, DatabaseReservationProvider>();
                 services.AddSingleton<IRegistrationCreator, DBRegistrationCreator>();
                 services.AddSingleton<IRegistrationConflictValidator, DBRegistrationConflictValidator>();
@@ -44,23 +49,15 @@ namespace GameProgressTracker
                 services.AddTransient<Progress>();
                 services.AddSingleton((s) => new Game(s.GetRequiredService<Progress>()));
 
-                services.AddTransient((s) => CreateRegistrationListingViewModel(s));
-                services.AddSingleton<Func<RegistrationListingViewModel>>((s) => () => s.GetRequiredService<RegistrationListingViewModel>());
-                services.AddSingleton<NavigationService<RegistrationListingViewModel>>();
-
-                services.AddTransient<AddRegistrationViewModel>();
-                services.AddSingleton<Func<AddRegistrationViewModel>>((s) => () => s.GetRequiredService<AddRegistrationViewModel>());
-                services.AddSingleton<NavigationService<AddRegistrationViewModel>>();
-
                 services.AddSingleton<GamesStore>();
                 services.AddSingleton<NavigationStore>();
+                services.AddSingleton<GamesStore>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
                 {
                     DataContext = s.GetRequiredService<MainViewModel>()
                 });
-
             }).Build();
         }
 
@@ -87,13 +84,6 @@ namespace GameProgressTracker
         {
             _host.Dispose();
             base.OnExit(e);
-        }
-
-        private RegistrationListingViewModel CreateRegistrationListingViewModel(IServiceProvider services)
-        {
-            return RegistrationListingViewModel.LoadViewModel(
-                services.GetRequiredService<GamesStore>(),
-                services.GetRequiredService<NavigationService<AddRegistrationViewModel>>());
         }
     }
 }

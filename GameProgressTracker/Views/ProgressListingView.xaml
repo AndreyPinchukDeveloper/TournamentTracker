@@ -103,10 +103,5 @@
                 </ListView>
             </Grid>
         </Grid>
-
-        <local:AddNewProgressView
-            Grid.Row="2"
-            Margin="0 20 0 0"
-            DataContext="{Binding AddRegistrationViewModel}"/>
     </Grid>
 </UserControl>
