@@ -40,6 +40,8 @@ namespace GameProgressTracker.ViewModels
         #region Commands
         public ICommand LoadRegistrationCommand { get; }
         public ICommand AddButtonCommand { get; }
+
+        public ICommand DeleteRowCommand { get; }
         #endregion
 
         public RegistrationListingViewModel(

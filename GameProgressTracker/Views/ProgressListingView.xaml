@@ -12,6 +12,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:InverseBooleanToVisibilityConverter x:Key = "InverseBooleanToVisibilityConverter"/>
     </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -39,6 +40,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Margin="0 25 0 0">
+            
             <custom:LoadingSpinner 
                 Thickness="5"
                 IsLoading="{Binding IsLoading}"
@@ -49,20 +51,24 @@
 
                 <TextBox Text="{Binding ErrorMessage}" Foreground="Red" Visibility="{Binding HasErrorMessage, Converter = {StaticResource BooleanToVisibilityConverter}}"/>
 
-                <ListView ItemsSource="{Binding Registration}" Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                <ListView 
+                        ItemsSource="{Binding Registration}" 
+                        Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                        Height="150">
 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         </Style>
                     </ListView.ItemContainerStyle>
+                    
                     <ListView.View>
                         <GridView>
 
                             <GridViewColumn Header="#">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding NumberInColumn}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NumberInColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -70,7 +76,7 @@
                             <GridViewColumn Header="Platform">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding NameOfPlatform}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding NameOfPlatform}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -102,6 +108,30 @@
                     </ListView.View>
                 </ListView>
             </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0 25 0 0">
+
+            <DataGrid ItemsSource="{Binding Registration}" 
+                        Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                        Height="150">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding NumberInColumn}" Header="#"/>
+                    <DataGridTextColumn Binding="{Binding NameOfPlatform}" Header="Platform"/>
+                    <DataGridTextColumn Binding="{Binding NameOfGame}" Header="Game"/>
+                    <DataGridTextColumn Binding="{Binding StartTime}" Header="Start date"/>
+                    <DataGridTextColumn Binding="{Binding EndTime}" Header="End date"/>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
         </Grid>
     </Grid>
 </UserControl>
