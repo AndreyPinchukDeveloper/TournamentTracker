@@ -113,8 +113,9 @@
         <Grid Grid.Row="2" Margin="0 25 0 0">
 
             <DataGrid ItemsSource="{Binding Registration}" 
-                        Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
-                        Height="150">
+                      Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                      Height="150"
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NumberInColumn}" Header="#"/>
                     <DataGridTextColumn Binding="{Binding NameOfPlatform}" Header="Platform"/>
@@ -125,7 +126,7 @@
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                
+                                <Button Command="{Binding DeleteRowCommand}">Delete</Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

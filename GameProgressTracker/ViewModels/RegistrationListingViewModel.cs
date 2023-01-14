@@ -53,6 +53,7 @@ namespace GameProgressTracker.ViewModels
             
             LoadRegistrationCommand = new LoadRegistrationsCommand(this, gameStore);
             AddButtonCommand = new NavigateCommand<AddRegistrationViewModel>(navigationService);
+            //DeleteRowCommand = new DeleteRegistrationCommand();
             _gameStore.MadeRegistration += OnRegistrationMade;
         }
 
