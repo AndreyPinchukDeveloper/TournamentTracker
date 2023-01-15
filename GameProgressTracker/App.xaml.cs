@@ -5,6 +5,7 @@ using GameProgressTracker.Models;
 using GameProgressTracker.Services;
 using GameProgressTracker.Services.RegistrationConflictValidators;
 using GameProgressTracker.Services.RegistrationCreator;
+using GameProgressTracker.Services.RegistrationDestroyer;
 using GameProgressTracker.Services.ReservationProviders;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
@@ -44,6 +45,7 @@ namespace GameProgressTracker
                 services.AddSingleton(new AppDbContextFactory(connectionString));
                 services.AddSingleton<IReservationProvider, DatabaseReservationProvider>();
                 services.AddSingleton<IRegistrationCreator, DBRegistrationCreator>();
+                services.AddSingleton<IRegistrationDestroyer, DBRegistrationDestroyer>();
                 services.AddSingleton<IRegistrationConflictValidator, DBRegistrationConflictValidator>();
 
                 services.AddTransient<Progress>();

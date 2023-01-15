@@ -23,6 +23,5 @@ namespace GameProgressTracker.DbContexts
             return new AppDbContext(options);
         }
 
-        
     }
 }

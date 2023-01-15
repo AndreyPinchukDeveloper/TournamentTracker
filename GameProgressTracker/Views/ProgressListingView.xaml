@@ -36,7 +36,7 @@
                 Margin="10 0 0 0"
                 Width="100"
                 Content="Add"
-                Command="{Binding AddButtonCommand}"/>
+                Command="{Binding DeleteRowCommand}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0 25 0 0">

@@ -44,16 +44,14 @@ namespace GameProgressTracker.ViewModels
         public ICommand DeleteRowCommand { get; }
         #endregion
 
-        public RegistrationListingViewModel(
-            GamesStore gameStore,
-            NavigationService<AddRegistrationViewModel> navigationService)
+        public RegistrationListingViewModel(GamesStore gameStore, NavigationService<AddRegistrationViewModel> navigationService)
         {
             _gameStore = gameStore;
             _registration = new ObservableCollection<RegistrationViewModel>();
             
             LoadRegistrationCommand = new LoadRegistrationsCommand(this, gameStore);
             AddButtonCommand = new NavigateCommand<AddRegistrationViewModel>(navigationService);
-            //DeleteRowCommand = new DeleteRegistrationCommand();
+            DeleteRowCommand = new DeleteRegistrationCommand(AddRegistrationViewModel,gameStore);
             _gameStore.MadeRegistration += OnRegistrationMade;
         }
 

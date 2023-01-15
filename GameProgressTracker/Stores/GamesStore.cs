@@ -48,6 +48,13 @@ namespace GameProgressTracker.Stores
             OnRegistrationMade(registration);
         }
 
+        public async Task DeleteRegistration(Registration registration)
+        {
+            await _game.DeleteRegistration(registration);
+            _registration.Remove(registration);
+            OnRegistrationMade(registration);
+        }
+
         private void OnRegistrationMade(Registration registration)
         {
             MadeRegistration?.Invoke(registration);

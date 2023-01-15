@@ -1,25 +1,26 @@
 ﻿using GameProgressTracker.DbContexts;
 using GameProgressTracker.DTOs;
 using GameProgressTracker.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace GameProgressTracker.Services.RegistrationCreator
+namespace GameProgressTracker.Services.RegistrationDestroyer
 {
-    public class DBRegistrationCreator : IRegistrationCreator
+    class DBRegistrationDestroyer : IRegistrationDestroyer
     {
         private readonly AppDbContextFactory _dbContextFactory;
 
-        public DBRegistrationCreator(AppDbContextFactory dbContextFactory)
+        public DBRegistrationDestroyer(AppDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task CreateRegistration(Registration registration)
+        public async Task DeleteRegistration(Registration registration)
         {
-            using(AppDbContext context = _dbContextFactory.CreateDbContext()) 
+            using (AppDbContext context = _dbContextFactory.CreateDbContext())
             {
                 RegistrationDTO registrationDTO = ToRegistrationDTO(registration);
-                context.Registrations.Add(registrationDTO);
+                context.Registrations.ExecuteDelete();
                 await context.SaveChangesAsync();
             }
         }
@@ -28,11 +29,11 @@ namespace GameProgressTracker.Services.RegistrationCreator
         {
             return new RegistrationDTO()
             {
-                NameOfPlatform= r.NameOfPlatform,
-                GameID= r.GameID,
+                NameOfPlatform = r.NameOfPlatform,
+                GameID = r.GameID,
                 NameOfGame = r.NameOfGame,
-                StartTime= r.StartTime,
-                EndTime= r.EndTime
+                StartTime = r.StartTime,
+                EndTime = r.EndTime
             };
         }
     }

@@ -1,6 +1,7 @@
 ﻿using GameProgressTracker.Exceptions;
 using GameProgressTracker.Services.RegistrationConflictValidators;
 using GameProgressTracker.Services.RegistrationCreator;
+using GameProgressTracker.Services.RegistrationDestroyer;
 using GameProgressTracker.Services.ReservationProviders;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace GameProgressTracker.Models
     {
         private readonly IReservationProvider _reservationProvider;
         private readonly IRegistrationCreator _registrationCreator;
+        private readonly IRegistrationDestroyer _registrationDestroyer;
         private readonly IRegistrationConflictValidator _registrationConflictValidator;
 
         public Progress(IReservationProvider reservationProvider, IRegistrationCreator registrationCreator, IRegistrationConflictValidator registrationConflictValidator)
@@ -41,6 +43,12 @@ namespace GameProgressTracker.Models
             }
 
             await _registrationCreator.CreateRegistration(registration);
+        }
+
+        public async Task DeleteRegistration(Registration registration)
+        {
+
+            await _registrationDestroyer.DeleteRegistration(registration);
         }
     }
 }

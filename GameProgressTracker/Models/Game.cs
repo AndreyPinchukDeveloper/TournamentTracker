@@ -32,5 +32,14 @@ namespace GameProgressTracker.Models
         {
             await _progress.AddRegistration(registration);
         }
+
+        /// <summary>
+        /// Make a registration for new game
+        /// </summary>
+        /// <param name="registration"></param>
+        public async Task DeleteRegistration(Registration registration)
+        {
+            await _progress.DeleteRegistration(registration);
+        }
     }
 }
