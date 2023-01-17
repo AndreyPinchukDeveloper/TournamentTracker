@@ -20,48 +20,37 @@ namespace GameProgressTracker.ViewModels
 
         public string GameID
         {
-            get { return _gameID; }
-            set { _gameID = value; OnPropertyChanged(nameof(GameID)); }
+            get => _gameID;
+            set => Set(ref _gameID, value);
         }
-
 
         private string _nameOfPlatform;
 		public string NameOfPlatform
 		{
-			get { return _nameOfPlatform; }
-			set 
-			{
-				_nameOfPlatform = value;
-               OnPropertyChanged(nameof(NameOfPlatform)); //nameof return not value but only name of object
-			}
+			get => _nameOfPlatform;
+			set => Set(ref _nameOfPlatform, value);
 		}
 
         private string _currentGame;
         public string CurrentGame
         {
-            get { return _currentGame; }
-            set
-            {
-                _currentGame = value;
-                OnPropertyChanged(nameof(CurrentGame));
-            }
+            get => _currentGame;
+            set => Set(ref _currentGame, value);
         }
 
         private DateTime _startTime;
 		public DateTime StartTime
         {
-            get { return _startTime; }
+            get => _startTime;
             set
             {
-                _startTime = value;
-                OnPropertyChanged(nameof(StartTime));
+                Set(ref _startTime, value);
                 ClearErrors(nameof(StartTime));
                 ClearErrors(nameof(EndTime));
 
                 if (EndTime < StartTime)
                 {
                     AddError("The start date can't be after end date.", nameof(StartTime));
-                    //OnErrorsChanged(nameof(StartTime));
                 }
             }
         }
@@ -70,11 +59,10 @@ namespace GameProgressTracker.ViewModels
   
         public DateTime EndTime
         {
-            get { return _endTime; }
+            get => _endTime;
             set
             {
-                _endTime = value;
-                OnPropertyChanged(nameof(EndTime));
+                Set(ref _endTime, value);
                 ClearErrors(nameof(StartTime));
                 ClearErrors(nameof(EndTime));               
 

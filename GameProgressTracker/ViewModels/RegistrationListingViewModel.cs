@@ -23,15 +23,15 @@ namespace GameProgressTracker.ViewModels
         private string _errorMessage;
         public string ErrorMessage
         {
-            get { return _errorMessage; }
-            set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); OnPropertyChanged(nameof(HasErrorMessage)); }
+            get => _errorMessage;
+            set { Set(ref _errorMessage, value); OnPropertyChanged(nameof(HasErrorMessage)); }
         }
 
         private bool _isLoading;
         public bool IsLoading
         {
-            get { return _isLoading; }
-            set { _isLoading = value; OnPropertyChanged(nameof(IsLoading)); }
+            get => _isLoading;
+            set => Set(ref _isLoading, value);
         }
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
