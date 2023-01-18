@@ -1,4 +1,5 @@
 ﻿using GameProgressTracker.Commands;
+using GameProgressTracker.Commands.Base;
 using GameProgressTracker.Models;
 using GameProgressTracker.Services;
 using GameProgressTracker.Stores;
@@ -68,8 +69,7 @@ namespace GameProgressTracker.ViewModels
 
                 if (EndTime < StartTime)
                 {
-                    AddError("The end date can't be before start date.", nameof(EndTime));                    
-                    //OnErrorsChanged(nameof(EndTime));                   
+                    AddError("The end date can't be before start date.", nameof(EndTime));            
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace GameProgressTracker.ViewModels
 
         public AddRegistrationViewModel(GamesStore gameStore, NavigationService<RegistrationListingViewModel> navigationService)
         {
-            SubmitButtonCommand = new AddRegistrationCommand(this, gameStore, navigationService);
+            SubmitButtonCommand = new AddGameAndNavigateCommand<RegistrationListingViewModel>(navigationService, gameStore, this);
             CancelButtonCommand = new NavigateCommand<RegistrationListingViewModel>(navigationService);
         }
 

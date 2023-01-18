@@ -5,27 +5,30 @@ using GameProgressTracker.Services;
 using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace GameProgressTracker.Commands
 {
-    public class AddRegistrationCommand : AsyncCommandBase
+    /// <summary>
+    /// Add new game to db and navigate to RegistrationListingVM
+    /// </summary>
+    /// <typeparam name="TViewModel"></typeparam>
+    public class AddGameAndNavigateCommand<TViewModel> : AsyncCommandBase where TViewModel : ViewModelBase
     {
         private readonly GamesStore _gameStore;
         private readonly NavigationService<RegistrationListingViewModel> _navigationService;
         private readonly AddRegistrationViewModel _addRegistrationViewModel;
 
-        public AddRegistrationCommand(
-            AddRegistrationViewModel addRegistrationViewModel, 
-            GamesStore gameStore, 
-            NavigationService<RegistrationListingViewModel> navigationService)
+        public AddGameAndNavigateCommand(NavigationService<RegistrationListingViewModel> navigationService, GamesStore gamesStore, AddRegistrationViewModel addRegistrationViewModel)
         {
-            _gameStore = gameStore;
             _navigationService = navigationService;
+            _gameStore = gamesStore;
             _addRegistrationViewModel = addRegistrationViewModel;
-
             _addRegistrationViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
@@ -50,13 +53,15 @@ namespace GameProgressTracker.Commands
 
                 MessageBox.Show("The job has done, my lord.", "Succes",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+
+                _navigationService.Navigate();
             }
             catch (RegistrationConflictException)
             {
-                MessageBox.Show("You have already added that game later, idiot.", "Error", 
+                MessageBox.Show("You have already added that game later, idiot.", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Failed to make registration.", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
