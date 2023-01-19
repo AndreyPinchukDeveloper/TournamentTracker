@@ -115,7 +115,7 @@ namespace GameProgressTracker.ViewModels
 
         private void OnErrorsChanged(string propertyName)
         {
-           ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(propertyName)));
+             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(propertyName)));
         }
     }
 }

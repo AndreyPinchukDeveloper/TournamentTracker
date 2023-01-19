@@ -11,6 +11,15 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:InverseBooleanToVisibilityConverter x:Key = "InverseBooleanToVisibilityConverter"/>
+
+        <ContextMenu x:Key="RowMenu" DataContext="{Binding}">
+            <MenuItem Header="Edit" Command="{Binding EditRowCommand}"/>
+            <MenuItem Header="Delete" Command="{Binding DeleteRowCommand}"/>
+        </ContextMenu>
+        
+        <Style x:Key="DefaultRowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource RowMenu}"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -61,10 +70,11 @@
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         </Style>
                     </ListView.ItemContainerStyle>
-                    
-                    <ListView.View>
-                        <GridView>
 
+                    <ListView.View>
+
+                        <GridView>
+                            
                             <GridViewColumn Header="#">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -115,14 +125,16 @@
             <DataGrid ItemsSource="{Binding Registration}" 
                       Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                       Height="150"
+                      RowStyle="{StaticResource DefaultRowStyle}"
                       AutoGenerateColumns="False">
+                
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NumberInColumn}" Header="#"/>
                     <DataGridTextColumn Binding="{Binding NameOfPlatform}" Header="Platform"/>
                     <DataGridTextColumn Binding="{Binding NameOfGame}" Header="Game"/>
                     <DataGridTextColumn Binding="{Binding StartTime}" Header="Start date"/>
                     <DataGridTextColumn Binding="{Binding EndTime}" Header="End date"/>
-
+                    
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
