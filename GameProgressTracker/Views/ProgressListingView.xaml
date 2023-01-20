@@ -14,12 +14,13 @@
 
         <ContextMenu x:Key="RowMenu" DataContext="{Binding}">
             <MenuItem Header="Edit" Command="{Binding EditRowCommand}"/>
-            <MenuItem Header="Delete" Command="{Binding DeleteRowCommand}"/>
+            <MenuItem Header="Delete" Command="{Binding DeleteRegistrationCommand}"/>
         </ContextMenu>
         
         <Style x:Key="DefaultRowStyle" TargetType="{x:Type DataGridRow}">
             <Setter Property="ContextMenu" Value="{StaticResource RowMenu}"/>
         </Style>
+        
     </UserControl.Resources>
 
     <Grid>
@@ -125,23 +126,16 @@
             <DataGrid ItemsSource="{Binding Registration}" 
                       Visibility="{Binding HasErrorMessage, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                       Height="150"
+                      SelectedItem="{Binding SelectedRow}"
                       RowStyle="{StaticResource DefaultRowStyle}"
                       AutoGenerateColumns="False">
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding NumberInColumn}" Header="#"/>
-                    <DataGridTextColumn Binding="{Binding NameOfPlatform}" Header="Platform"/>
-                    <DataGridTextColumn Binding="{Binding NameOfGame}" Header="Game"/>
-                    <DataGridTextColumn Binding="{Binding StartTime}" Header="Start date"/>
-                    <DataGridTextColumn Binding="{Binding EndTime}" Header="End date"/>
-                    
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Command="{Binding DeleteRowCommand}">Delete</Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Width="0.25*" Binding="{Binding NumberInColumn}" Header="#"/>
+                    <DataGridTextColumn Width="0.25*" Binding="{Binding NameOfPlatform}" Header="Platform"/>
+                    <DataGridTextColumn Width="0.25*" Binding="{Binding NameOfGame}" Header="Game"/>
+                    <DataGridTextColumn Width="0.25*" Binding="{Binding StartTime}" Header="Start date"/>
+                    <DataGridTextColumn Width="0.25*" Binding="{Binding EndTime}" Header="End date"/>
                 </DataGrid.Columns>
             </DataGrid>
             

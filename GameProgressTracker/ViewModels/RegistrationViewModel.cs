@@ -12,6 +12,14 @@ namespace GameProgressTracker.ViewModels
     {
         private readonly Registration _registration;
 
+        private Registration _selectedRow;
+
+        public Registration SelectedRow
+        {
+            get { return _selectedRow; }
+            set { _selectedRow = value; }
+        }
+
         public string NumberInColumn => _registration.GameID;
         public string NameOfPlatform => _registration.NameOfPlatform;
         public string NameOfGame => _registration.NameOfGame;

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GameProgressTracker.Commands
 {
@@ -17,34 +18,23 @@ namespace GameProgressTracker.Commands
     {
         private readonly GamesStore _gameStore;
         private readonly AddRegistrationViewModel _addRegistrationViewModel;
+        private readonly Registration _registration;
+        private readonly RegistrationViewModel _registrationViewModel;
+        
 
-        public DeleteRegistrationCommand(AddRegistrationViewModel addRegistrationViewModel, GamesStore gameStore)
+        public DeleteRegistrationCommand(Registration registration, AddRegistrationViewModel addRegistrationViewModel, GamesStore gameStore)
         {
+            _registration = registration;
             _gameStore = gameStore;
             _addRegistrationViewModel = addRegistrationViewModel;
         }
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            Registration registration = new Registration(
-            _addRegistrationViewModel.NameOfPlatform,
-            _addRegistrationViewModel.GameID,
-            _addRegistrationViewModel.CurrentGame,
-            _addRegistrationViewModel.StartTime,
-            _addRegistrationViewModel.EndTime
-            );
-
-            try
+            var selectedItem = myDataGrid.SelectedItem;
+            if (selectedItem != null)
             {
-                await _gameStore.DeleteRegistration(registration);
-
-                MessageBox.Show("The job has done, my lord.", "Succes",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Failed to delete registration.", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                myDataGrid.Items.Remove(selectedItem);
             }
         }
     }

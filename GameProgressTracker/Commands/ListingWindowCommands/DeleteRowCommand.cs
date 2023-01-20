@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameProgressTracker.Commands.ListingWindowCommands
 {
-    class DeleteRowCommand
+    public class DeleteRowCommand
     {
     }
 }
