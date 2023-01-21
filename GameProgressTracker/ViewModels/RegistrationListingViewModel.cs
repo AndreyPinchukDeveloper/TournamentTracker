@@ -16,7 +16,9 @@ namespace GameProgressTracker.ViewModels
     {
         private readonly ObservableCollection<RegistrationViewModel> _registration;//we don't use Registration class as observable because we nedd class which implement INotifyPropertyChanged
         private readonly GamesStore _gameStore;
-        public IEnumerable<RegistrationViewModel> Registration => _registration;
+        private readonly RegistrationViewModel registrationView;
+
+        public IEnumerable<RegistrationViewModel> Registration => _registration;//all registrations
         public AddRegistrationViewModel AddRegistrationViewModel { get; }
 
         #region Properties
@@ -26,7 +28,7 @@ namespace GameProgressTracker.ViewModels
             get => _errorMessage;
             set { Set(ref _errorMessage, value); OnPropertyChanged(nameof(HasErrorMessage)); }
         }
-
+        
         private bool _isLoading;
         public bool IsLoading
         {
@@ -44,14 +46,14 @@ namespace GameProgressTracker.ViewModels
         public ICommand DeleteRowCommand { get; }
         #endregion
 
-        public RegistrationListingViewModel(Registration registration, AddRegistrationViewModel addRegistrationViewModel, GamesStore gameStore, NavigationService<AddRegistrationViewModel> navigationService)
+        public RegistrationListingViewModel(GamesStore gameStore, NavigationService<AddRegistrationViewModel> navigationService)
         {
             _gameStore = gameStore;
             _registration = new ObservableCollection<RegistrationViewModel>();
-            
+
             LoadRegistrationCommand = new LoadRegistrationsCommand(this, gameStore);
             AddButtonCommand = new NavigateCommand<AddRegistrationViewModel>(navigationService);
-            DeleteRowCommand = new DeleteRegistrationCommand(registration, addRegistrationViewModel, gameStore);
+            DeleteRowCommand = new DeleteRegistrationCommand(_registration);
             _gameStore.MadeRegistration += OnRegistrationMade;
         }
 
@@ -67,9 +69,7 @@ namespace GameProgressTracker.ViewModels
             _registration.Add(registrationViewModel);
         }
 
-        public static RegistrationListingViewModel LoadViewModel(
-            GamesStore appStore, 
-            NavigationService<AddRegistrationViewModel> makeRegistrationNavigationService)
+        public static RegistrationListingViewModel LoadViewModel(GamesStore appStore, NavigationService<AddRegistrationViewModel> makeRegistrationNavigationService)
         {
             RegistrationListingViewModel viewModel = new RegistrationListingViewModel(appStore, makeRegistrationNavigationService);
 

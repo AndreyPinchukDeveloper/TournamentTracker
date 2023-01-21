@@ -12,9 +12,9 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:InverseBooleanToVisibilityConverter x:Key = "InverseBooleanToVisibilityConverter"/>
 
-        <ContextMenu x:Key="RowMenu" DataContext="{Binding}">
+        <ContextMenu x:Key="RowMenu">
             <MenuItem Header="Edit" Command="{Binding EditRowCommand}"/>
-            <MenuItem Header="Delete" Command="{Binding DeleteRegistrationCommand}"/>
+            <MenuItem Header="Delete" Command="{Binding DeleteRowCommand}"/>
         </ContextMenu>
         
         <Style x:Key="DefaultRowStyle" TargetType="{x:Type DataGridRow}">

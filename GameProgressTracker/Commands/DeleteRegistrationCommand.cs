@@ -6,6 +6,7 @@ using GameProgressTracker.Stores;
 using GameProgressTracker.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,26 +17,17 @@ namespace GameProgressTracker.Commands
 {
     class DeleteRegistrationCommand : AsyncCommandBase
     {
-        private readonly GamesStore _gameStore;
-        private readonly AddRegistrationViewModel _addRegistrationViewModel;
-        private readonly Registration _registration;
-        private readonly RegistrationViewModel _registrationViewModel;
-        
+        private readonly RegistrationViewModel _registrationViewModel;//NULL
+        private ObservableCollection<RegistrationViewModel> _registration;//NULL
 
-        public DeleteRegistrationCommand(Registration registration, AddRegistrationViewModel addRegistrationViewModel, GamesStore gameStore)
+        public DeleteRegistrationCommand(ObservableCollection<RegistrationViewModel> registration)
         {
-            _registration = registration;
-            _gameStore = gameStore;
-            _addRegistrationViewModel = addRegistrationViewModel;
+            _registration = registration;//NULL
         }
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            var selectedItem = myDataGrid.SelectedItem;
-            if (selectedItem != null)
-            {
-                myDataGrid.Items.Remove(selectedItem);
-            }
+            _registration.Remove(_registrationViewModel);
         }
     }
 }
