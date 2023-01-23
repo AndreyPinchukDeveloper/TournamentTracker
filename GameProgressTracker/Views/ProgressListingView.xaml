@@ -123,8 +123,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Edit" Command="{Binding EditRowCommand}"/>
-                        <MenuItem Header="Delete" Command="{Binding DeleteRowCommand}" CommandParameter="{Binding Path=SelectedItem,
-           RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        <MenuItem Header="Delete" Command="{Binding DeleteRowCommand}"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 
