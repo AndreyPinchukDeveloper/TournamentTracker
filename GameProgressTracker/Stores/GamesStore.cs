@@ -24,8 +24,6 @@ namespace GameProgressTracker.Stores
             _game = game;
             _registration = new List<Registration>();
             _initializeLazy = new Lazy<Task>(Initialize());
-            
-
         }
 
         public async Task Load()//load all data from db
@@ -52,7 +50,6 @@ namespace GameProgressTracker.Stores
         {
             await _game.DeleteRegistration(registration);
             _registration.Remove(registration);
-            OnRegistrationMade(registration);
         }
 
         private void OnRegistrationMade(Registration registration)

@@ -23,8 +23,8 @@ namespace GameProgressTracker.ViewModels
         public string NumberInColumn => _registration.GameID;
         public string NameOfPlatform => _registration.NameOfPlatform;
         public string NameOfGame => _registration.NameOfGame;
-        public string StartTime => _registration.StartTime.ToString("d");
-        public string EndTime => _registration.EndTime.ToString("d");
+        public DateTime StartTime => _registration.StartTime;
+        public DateTime EndTime => _registration.EndTime;
 
         public RegistrationViewModel(Registration registration)
         {

@@ -21,11 +21,12 @@ namespace GameProgressTracker.Models
         private readonly IRegistrationDestroyer _registrationDestroyer;
         private readonly IRegistrationConflictValidator _registrationConflictValidator;
 
-        public Progress(IReservationProvider reservationProvider, IRegistrationCreator registrationCreator, IRegistrationConflictValidator registrationConflictValidator)
+        public Progress(IReservationProvider reservationProvider, IRegistrationCreator registrationCreator, IRegistrationConflictValidator registrationConflictValidator, IRegistrationDestroyer registrationDestroyer)
         {
             _reservationProvider = reservationProvider;
             _registrationCreator = registrationCreator;
             _registrationConflictValidator = registrationConflictValidator;
+            _registrationDestroyer = registrationDestroyer;
         }
 
         public async Task<IEnumerable<Registration>> GetAllRegistrations()

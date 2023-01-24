@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GameProgressTracker.ViewModels
@@ -17,7 +18,6 @@ namespace GameProgressTracker.ViewModels
         private readonly ObservableCollection<RegistrationViewModel> _registration;//we don't use Registration class as observable because we nedd class which implement INotifyPropertyChanged
         private readonly GamesStore _gameStore;
         private readonly RegistrationViewModel registrationView;
-
         public IEnumerable<RegistrationViewModel> Registration => _registration;//all registrations
         public AddRegistrationViewModel AddRegistrationViewModel { get; }
 
@@ -82,11 +82,20 @@ namespace GameProgressTracker.ViewModels
         {
             _registration.Clear();
 
-            foreach (Registration registration in registrations) 
-            { 
-                RegistrationViewModel registrationViewModel = new RegistrationViewModel(registration);
-                _registration.Add(registrationViewModel);
+            try
+            {
+                foreach (Registration registration in registrations)
+                {
+                    RegistrationViewModel registrationViewModel = new RegistrationViewModel(registration);
+                    _registration.Add(registrationViewModel);
+                }
             }
-        }
+
+            catch (Exception)
+            {
+
+                MessageBox.Show("null");
+            }
+        }    
     }
 }
