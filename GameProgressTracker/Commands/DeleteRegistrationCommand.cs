@@ -42,7 +42,7 @@ namespace GameProgressTracker.Commands
                 _registrationViewModelToDelete.EndTime);
 
             _gameStore.DeleteRegistration(registration);
-            _registrationListingViewModel.UpdateRegistrations(_gameStore.Registration);
+            //_registrationListingViewModel.UpdateRegistrations(_gameStore.Registration);
         }
 
         public void GetOneRegistration(IEnumerable<Registration> registrations)
